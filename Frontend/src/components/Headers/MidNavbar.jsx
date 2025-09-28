@@ -361,7 +361,7 @@ const MidNavbar = () => {
   }, []);
 
   return (
-    <div className=" mid-strip py-2  bg-white border-b border-gray-100 mid-strip sticky top-0 z-50 shadow-sm">
+    <div className=" mid-strip py-2  bg-white border-b border-gray-100 mid-strip ">
       <div className="container  mx-auto ">
         {/* Unified Responsive Layout */}
         <div className="flex justify-between items-center gap-2 xl:gap-8">
