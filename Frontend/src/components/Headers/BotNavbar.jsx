@@ -5,7 +5,15 @@ import { IoIosArrowDown } from "react-icons/io";
 import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import ButtonBase from "@mui/material/ButtonBase";
+import DrawerBox from "./DrawerBox";
+
 const BotNavbar = () => {
+const [isOpenCatPanel, setIsOpenCatPanel] = useState(false);
+
+const openCategoryPanel = () => {
+  setIsOpenCatPanel((prev) => !prev);
+};
+
   const [avatarSrc, setAvatarSrc] = React.useState(undefined);
   const [navList, setNavList] = useState([
     "Home",
@@ -30,66 +38,143 @@ const BotNavbar = () => {
       reader.readAsDataURL(file);
     }
   };
+
   return (
     <>
-      <div className="container py-3 flex itemcenter gap-5 text-sm font-semibold ">
-        <Button className="col1 w-[20%] flex items-start gap-1 sm:gap-2 sm:items-center !text-black !text-sm !font-semibold hover:bg-gray-200">
-          <span className="cursor-pointer ">
-            <RiMenu2Fill className="text-sm font-semibold" />
-          </span>
-          <span className="hidden w-full sm:flex sm:items-center sm:justify-between ">
-            Shop By Category <IoIosArrowDown />
-          </span>
-          <span className="sm:hidden w-full ">Category!</span>
-        </Button>
-
-        <div className="col2 flex w-[67%]">
-          <ul className="hidden sm:flex gap-6 text-gray-700  sm:items-center font-semibold">
-            {navList.map((item) => (
-              <li key={item}>
-                <Link to={`/${item.toLowerCase()}`} className="link">
-                  {item}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="!text-black !text-sm !font-semibold col3 w-full sm:w-[13%] flex items-center gap-4 justify-end pr-2 ">
-          Hii , {"Harshit"} ! 
+      <div className="container py-3 flex items-center gap-2 sm:gap-5 text-sm font-semibold">
+        {/* Category Button */}
+        {/* Category Button */}
+        <div className="flex-shrink-0">
           <ButtonBase
-            component="label"
-            role={undefined}
-            tabIndex={-1} // prevent label from tab focus
-            aria-label="Avatar image"
-            sx={{
-              borderRadius: "40px",
-              "&:has(:focus-visible)": {
-                outline: "2px solid",
-                outlineOffset: "2px",
-              },
-            }}
+            onClick={openCategoryPanel}
+            className="!px-1 flex items-center gap-1 sm:gap-2 text-sm font-semibold text-black !rounded-md hover:!text-[#ff5252] hover:bg-gray-200 transition-all duration-200 !min-w-fit"
+            component="button"
           >
-            <Avatar alt="Upload new avatar" src={avatarSrc} />
-            <input
-              type="file"
-              accept="image/*"
-              style={{
-                border: 0,
-                clip: "rect(0 0 0 0)",
-                height: "1px",
-                margin: "-1px",
-                overflow: "hidden",
-                padding: 0,
-                position: "absolute",
-                whiteSpace: "nowrap",
-                width: "1px",
-              }}
-              onChange={handleAvatarChange}
-            />
+            <RiMenu2Fill className="text-sm font-semibold" />
+            <span className="!py-2 !px-1  hidden sm:flex items-center gap-1">
+              Shop By Category <IoIosArrowDown />
+            </span>
+            <span className="sm:hidden">Category</span>
           </ButtonBase>
-          
+        </div>
+
+        {/* Vertical Divider */}
+        <div className="w-[2px] bg-gray-300 h-6 hidden lg:block flex-shrink-0"></div>
+
+        {/* Navigation Links - Scrollable */}
+        <div className="flex-1 min-w-0">
+          <div className="hidden sm:block overflow-x-auto scrollbar-hide">
+            <ul className="flex gap-3 sm:gap-6 text-gray-700 font-semibold whitespace-nowrap pb-1">
+              {navList.map((item) => (
+                <li key={item} className="flex-shrink-0">
+                  <ButtonBase
+                    component={Link}
+                    to={`/${item.toLowerCase()}`}
+                    className="!px-2 !py-1 !rounded-md hover:bg-gray-200 transition-all duration-200 text-sm link "
+                  >
+                    {item}
+                  </ButtonBase>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* User Profile Section */}
+        <div className="flex-shrink-0">
+          <div className="!text-black !text-sm !font-semibold hidden md:flex items-center gap-2 lg:gap-4 pr-2">
+            <span className="hidden lg:inline whitespace-nowrap">
+              Hi, Harshit!
+            </span>
+            <ButtonBase
+              component="label"
+              role={undefined}
+              tabIndex={-1}
+              aria-label="Avatar image"
+              sx={{
+                borderRadius: "40px",
+                "&:has(:focus-visible)": {
+                  outline: "2px solid",
+                  outlineOffset: "2px",
+                },
+              }}
+            >
+              <Avatar
+                alt="Upload new avatar"
+                src={avatarSrc}
+                sx={{ width: 32, height: 32 }}
+              />
+              <input
+                type="file"
+                accept="image/*"
+                style={{
+                  border: 0,
+                  clip: "rect(0 0 0 0)",
+                  height: "1px",
+                  margin: "-1px",
+                  overflow: "hidden",
+                  padding: 0,
+                  position: "absolute",
+                  whiteSpace: "nowrap",
+                  width: "1px",
+                }}
+                onChange={handleAvatarChange}
+              />
+            </ButtonBase>
+          </div>
+
+          {/* Mobile Avatar Only */}
+          <div className="md:hidden">
+            <ButtonBase
+              component="label"
+              role={undefined}
+              tabIndex={-1}
+              aria-label="Avatar image"
+              sx={{
+                borderRadius: "40px",
+                "&:has(:focus-visible)": {
+                  outline: "2px solid",
+                  outlineOffset: "2px",
+                },
+              }}
+            >
+              <Avatar
+                alt="Upload new avatar"
+                src={avatarSrc}
+                sx={{ width: 28, height: 28 }}
+              />
+              <input
+                type="file"
+                accept="image/*"
+                style={{
+                  border: 0,
+                  clip: "rect(0 0 0 0)",
+                  height: "1px",
+                  margin: "-1px",
+                  overflow: "hidden",
+                  padding: 0,
+                  position: "absolute",
+                  whiteSpace: "nowrap",
+                  width: "1px",
+                }}
+                onChange={handleAvatarChange}
+              />
+            </ButtonBase>
+          </div>
         </div>
       </div>
+
+      {/* Custom CSS for hiding scrollbar */}
+      <style jsx>{`
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
+      <DrawerBox isOpenCatPanel={isOpenCatPanel} openCategoryPanel={openCategoryPanel} />
     </>
   );
 };

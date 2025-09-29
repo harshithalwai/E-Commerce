@@ -94,21 +94,21 @@ const TopNavbar = () => {
 
           <div className="col2 flex items-center">
             <ul className="flex items-center space-x-2 sm:space-x-4 text-xs sm:text-sm">
-              <li className="!hidden sm:block link text-[13px] ">
+              <li className="!hidden sm:!block link text-[13px] ">
                 <Link to="/help-center" className="">
                   Help Center
                 </Link>
               </li>
 
-              <div className="hz-line border bg-gray-400 !hidden lg:block border-gray-400 w-[2px] h-[20px] "></div>
+              <div className="hz-line border bg-gray-400 !hidden lg:!block border-gray-400 w-[2px] h-[20px] "></div>
 
-              <li className="!hidden sm:block link text-[13px]">
+              <li className="!hidden sm:!block link text-[13px]">
                 <Link to="/order-tracking" className="">
                   Order Tracking
                 </Link>
               </li>
 
-              <div className="hz-line border bg-gray-400 hidden lg:block border-gray-400 w-[2px] h-[20px] "></div>
+              <div className="hz-line border bg-gray-400 !hidden lg:!block border-gray-400 w-[2px] h-[20px] "></div>
 
               {/* Country Dropdown - 3rd link (Flag + Name) */}
               <li className="lg:relative" ref={dropdownRef}>
