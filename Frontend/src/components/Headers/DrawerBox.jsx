@@ -11,12 +11,16 @@ import { FiMinusSquare } from "react-icons/fi";
 const DrawerBox = ({ isOpenCatPanel, openCategoryPanel }) => {
   const [subMenuIndex, setSubMenuIndex] = useState(null);
   const [innerSubMenuIndex, setInnerSubMenuIndex] = useState(null);
+
   const openSubMenu = (index) => {
     setSubMenuIndex(index === subMenuIndex ? null : index);
+    setInnerSubMenuIndex(null); // reset inner submenu when switching
   };
+
   const openInnerSubMenu = (index) => {
     setInnerSubMenuIndex(index === innerSubMenuIndex ? null : index);
   };
+
   const DrawerList = (
     <Box sx={{ width: 300 }} role="presentation" className="category-panel">
       {/* Header with Close Icon */}
@@ -33,89 +37,146 @@ const DrawerBox = ({ isOpenCatPanel, openCategoryPanel }) => {
       {/* Scrollable List */}
       <div className="scroll mt-4 h-[80vh] overflow-y-auto">
         <ul className="w-full px-2">
-          <li className="list-none flex items-center relative !font-semibold">
-            <Button
-              onClick={() => {
-                openSubMenu(0);
-              }}
-              component={Link}
-              to="/fashion"
-              className="w-full !text-left !font-[500] !justify-start !px-3 !text-[rgba(0,0,0,0.8)] hover:!text-[#ff5252] hover:!bg-gray-200 rounded-md transition-all duration-200"
-            >
-              Fashion
-            </Button>
-            {subMenuIndex == 0 ? (
-              <FiMinusSquare
-                className="cursor-pointer absolute top-[10px] right-[15px]"
-                onClick={() => {
-                  openSubMenu(0);
-                }}
-              />
-            ) : (
-              <FaRegSquarePlus
-                onClick={() => {
-                  openSubMenu(0);
-                }}
-                className="cursor-pointer absolute top-[10px] right-[15px]"
-              />
-            )}
+          {/* Main Menu Item */}
+          <li className="list-none flex flex-col !font-semibold">
+            <div className="flex items-center relative">
+              <Button
+                onClick={() => openSubMenu(0)}
+                component={Link}
+                to="/fashion"
+                className="w-full !text-left !font-[500] !justify-start !px-3 !text-[rgba(0,0,0,0.8)] hover:!text-[#ff5252] hover:!bg-gray-200 rounded-md transition-all duration-200"
+              >
+                Fashion
+              </Button>
 
-            {subMenuIndex == 0 && (
-              <ul className="submenu absolute top-[100%] left-[0%] w-full pl-3">
-                <li className="list-none flex items-center relative !font-semibold">
-                  <Button
-                    onClick={() => {
-                      openInnerSubMenu(0);
-                    }}
-                    component={Link}
-                    to="/fashion"
-                    className="hover:!text-[#ff5252] hover:bg-gray-200 rounded-md transition-all duration-200 w-full !text-left !font-[500] !justify-start !px-3 !text-[rgba(0,0,0,0.8)]"
-                  >
-                    Fashion Items
-                  </Button>
-                  {innerSubMenuIndex == 0 ? (
-                    <FiMinusSquare
-                      className="cursor-pointer absolute top-[10px] right-[15px]"
-                      onClick={() => {
-                        openInnerSubMenu(0);
-                      }}
-                    />
-                  ) : (
-                    <FaRegSquarePlus
-                      onClick={() => {
-                        openInnerSubMenu(0);
-                      }}
-                      className="cursor-pointer absolute top-[10px] right-[15px]"
-                    />
+              {subMenuIndex === 0 ? (
+                <FiMinusSquare
+                  className="cursor-pointer absolute top-1/2 -translate-y-1/2 right-[15px]"
+                  onClick={() => openSubMenu(0)}
+                />
+              ) : (
+                <FaRegSquarePlus
+                  className="cursor-pointer absolute top-1/2 -translate-y-1/2 right-[15px]"
+                  onClick={() => openSubMenu(0)}
+                />
+              )}
+            </div>
+
+            {/* Submenu */}
+            {subMenuIndex === 0 && (
+              <ul className="submenu w-full pl-4 mt-2 flex flex-col gap-2">
+                {/* Submenu Item 1 */}
+                <li className="list-none flex flex-col !font-semibold">
+                  <div className="flex items-center relative">
+                    <Button
+                      onClick={() => openInnerSubMenu(0)}
+                      component={Link}
+                      to="/fashion"
+                      className="hover:!text-[#ff5252] hover:bg-gray-200 rounded-md transition-all duration-200 w-full !text-left !font-[500] !justify-start !px-3 !text-[rgba(0,0,0,0.8)]"
+                    >
+                      Fashion Items
+                    </Button>
+
+                    {innerSubMenuIndex === 0 ? (
+                      <FiMinusSquare
+                        className="cursor-pointer absolute top-1/2 -translate-y-1/2 right-[15px]"
+                        onClick={() => openInnerSubMenu(0)}
+                      />
+                    ) : (
+                      <FaRegSquarePlus
+                        className="cursor-pointer absolute top-1/2 -translate-y-1/2 right-[15px]"
+                        onClick={() => openInnerSubMenu(0)}
+                      />
+                    )}
+                  </div>
+
+                  {/* Inner Submenu */}
+                  {innerSubMenuIndex === 0 && (
+                    <ul className="inner-submenu w-full pl-4 mt-2 flex flex-col gap-2">
+                      <li>
+                        <Button
+                          component={Link}
+                          to="/fashion"
+                          className="!capitalize hover:!text-[#ff5252] hover:bg-gray-200 rounded-md text-left !px-3 !font-[500] !text-[rgba(0,0,0,0.8)]"
+                        >
+                          Item 1
+                        </Button>
+                      </li>
+                      <li>
+                        <Button
+                          component={Link}
+                          to="/fashion"
+                          className="!capitalize hover:!text-[#ff5252] hover:bg-gray-200 rounded-md  text-left !px-3 !font-[500] !text-[rgba(0,0,0,0.8)]"
+                        >
+                          Item 2
+                        </Button>
+                      </li>
+                      <li>
+                        <Button
+                          component={Link}
+                          to="/fashion"
+                          className="!capitalize hover:!text-[#ff5252] hover:bg-gray-200 rounded-md  text-left !px-3 !font-[500] !text-[rgba(0,0,0,0.8)]"
+                        >
+                          Item 3
+                        </Button>
+                      </li>
+                    </ul>
                   )}
+                </li>
 
-                  {innerSubMenuIndex == 0 && (
-                    <ul className="inner-submenu absolute top-[100%] left-[0%] w-full pl-3">
-                      <li className="list-none flex items-center relative !font-semibold">
+                {/* Submenu Item 2 */}
+                <li className="list-none flex flex-col !font-semibold">
+                  <div className="flex items-center relative">
+                    <Button
+                      onClick={() => openInnerSubMenu(1)}
+                      component={Link}
+                      to="/fashion"
+                      className="hover:!text-[#ff5252] hover:bg-gray-200 rounded-md transition-all duration-200 w-full !text-left !font-[500] !justify-start !px-3 !text-[rgba(0,0,0,0.8)]"
+                    >
+                      Diamonds
+                    </Button>
+
+                    {innerSubMenuIndex === 1 ? (
+                      <FiMinusSquare
+                        className="cursor-pointer absolute top-1/2 -translate-y-1/2 right-[15px]"
+                        onClick={() => openInnerSubMenu(1)}
+                      />
+                    ) : (
+                      <FaRegSquarePlus
+                        className="cursor-pointer absolute top-1/2 -translate-y-1/2 right-[15px]"
+                        onClick={() => openInnerSubMenu(1)}
+                      />
+                    )}
+                  </div>
+
+                  {/* Inner Submenu */}
+                  {innerSubMenuIndex === 1 && (
+                    <ul className="inner-submenu w-full pl-4 mt-2 flex flex-col gap-2">
+                      <li>
                         <Button
                           component={Link}
                           to="/fashion"
-                          className="!capitalize hover:!text-[#ff5252] hover:bg-gray-200 rounded-md transition-all duration-200 w-full !text-left !font-[500] !justify-start !px-3 !text-[rgba(0,0,0,0.8)]"
+                          className="!capitalize hover:!text-[#ff5252] hover:bg-gray-200 rounded-md  text-left !px-3 !font-[500] !text-[rgba(0,0,0,0.8)]"
                         >
-                          Item
+                          Item 1
                         </Button>
                       </li>
-                      <li className="list-none flex items-center relative !font-semibold">
+                      <li>
                         <Button
                           component={Link}
                           to="/fashion"
-                          className="!capitalize hover:!text-[#ff5252] hover:bg-gray-200 rounded-md transition-all duration-200 w-full !text-left !font-[500] !justify-start !px-3 !text-[rgba(0,0,0,0.8)]"
+                          className="!capitalize hover:!text-[#ff5252] hover:bg-gray-200 rounded-md text-left !px-3 !font-[500] !text-[rgba(0,0,0,0.8)]"
                         >
-                          Item
+                          Item 2
                         </Button>
                       </li>
-                      <li className="list-none flex items-center relative !font-semibold">
+                      <li>
                         <Button
                           component={Link}
                           to="/fashion"
-                          className="!capitalize hover:!text-[#ff5252] hover:bg-gray-200 rounded-md transition-all duration-200 w-full !text-left !font-[500] !justify-start !px-3 !text-[rgba(0,0,0,0.8)]"
+                          className="!capitalize hover:!text-[#ff5252] hover:bg-gray-200 rounded-md  text-left !px-3 !font-[500] !text-[rgba(0,0,0,0.8)]"
                         >
-                          Item
+                          Item 3
                         </Button>
                       </li>
                     </ul>

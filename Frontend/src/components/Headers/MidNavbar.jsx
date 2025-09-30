@@ -331,7 +331,7 @@ const MobileActionsPopup = ({
   );
 };
 
-const MidNavbar = ({ isSticky = false }) => {
+const MidNavbar = () => {
   const [wishlistCount, setWishlistCount] = useState(2);
   const [notificationCount, setNotificationCount] = useState(5);
   const [cartCount, setCartCount] = useState(4);
@@ -361,12 +361,11 @@ const MidNavbar = ({ isSticky = false }) => {
   }, []);
 
   return (
-    <div className={
-        `mid-strip bg-white border-b border-gray-100 transition-all duration-200 ` +
-        (isSticky
-          ? "py-1 xl:py-2" // slightly smaller when stuck
-          : "py-2 xl:py-3")
-      }>
+    <div
+      className={
+        "sticky top-0 left-0 right-0 bg-white mid-strip  z-50 border-b border-gray-100 transition-all duration-200 py-1 xl:py-2"
+      }
+    >
       <div className="container  mx-auto ">
         {/* Unified Responsive Layout */}
         <div className="flex justify-between items-center gap-2 xl:gap-8">

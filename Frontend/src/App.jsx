@@ -1,9 +1,11 @@
 import React from "react";
-import { Navbar } from "./components/index.js";
+import { TopNavbar, MidNavbar,BotNavbar } from "./components/index.js";
 const App = () => {
   return (
     <>
-      <Navbar />
+      <TopNavbar />
+      <MidNavbar />
+      <BotNavbar />
     </>
   );
 };

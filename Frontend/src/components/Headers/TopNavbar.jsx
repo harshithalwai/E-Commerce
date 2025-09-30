@@ -79,7 +79,7 @@ const TopNavbar = () => {
   };
 
   return (
-    <div className="top-strip  border-b-2 border-[rgba(0,0,0,0.1)] py-2">
+    <div className="top-strip bg-white border-b-2 border-[rgba(0,0,0,0.1)] py-2">
       <div className="container mx-auto sm:px-6">
         <div className="flex justify-between items-center">
           <div className="col1 w-[60%] lg:w-auto">

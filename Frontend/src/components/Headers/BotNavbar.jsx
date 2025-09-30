@@ -8,11 +8,11 @@ import ButtonBase from "@mui/material/ButtonBase";
 import DrawerBox from "./DrawerBox";
 
 const BotNavbar = () => {
-const [isOpenCatPanel, setIsOpenCatPanel] = useState(false);
+  const [isOpenCatPanel, setIsOpenCatPanel] = useState(false);
 
-const openCategoryPanel = () => {
-  setIsOpenCatPanel((prev) => !prev);
-};
+  const openCategoryPanel = () => {
+    setIsOpenCatPanel((prev) => !prev);
+  };
 
   const [avatarSrc, setAvatarSrc] = React.useState(undefined);
   const [navList, setNavList] = useState([
@@ -41,140 +41,157 @@ const openCategoryPanel = () => {
 
   return (
     <>
-      <div className="container py-3 flex items-center gap-2 sm:gap-5 text-sm font-semibold">
-        {/* Category Button */}
-        {/* Category Button */}
-        <div className="flex-shrink-0">
-          <ButtonBase
-            onClick={openCategoryPanel}
-            className="!px-1 flex items-center gap-1 sm:gap-2 text-sm font-semibold text-black !rounded-md hover:!text-[#ff5252] hover:bg-gray-200 transition-all duration-200 !min-w-fit"
-            component="button"
-          >
-            <RiMenu2Fill className="text-sm font-semibold" />
-            <span className="!py-2 !px-1  hidden sm:flex items-center gap-1">
-              Shop By Category <IoIosArrowDown />
-            </span>
-            <span className="sm:hidden">Category</span>
-          </ButtonBase>
-        </div>
+      <div className="bg-white">
+        <div className="container py-3 flex items-center gap-2 sm:gap-5 text-sm font-semibold">
+          {/* Category Button */}
+          {/* Category Button */}
+          <div className="flex-shrink-0">
+            <ButtonBase
+              onClick={openCategoryPanel}
+              className="!px-1 flex items-center gap-1 sm:gap-2 text-sm font-semibold text-black !rounded-md hover:!text-[#ff5252] hover:bg-gray-200 transition-all duration-200 !min-w-fit"
+              component="button"
+            >
+              <RiMenu2Fill className="text-sm font-semibold" />
+              <span className="!py-2 !px-1  hidden sm:flex items-center gap-1">
+                Shop By Category <IoIosArrowDown />
+              </span>
+              <span className="sm:hidden">Category</span>
+            </ButtonBase>
+          </div>
 
-        {/* Vertical Divider */}
-        <div className="w-[2px] bg-gray-300 h-6 hidden lg:block flex-shrink-0"></div>
+          {/* Vertical Divider */}
+          <div className="w-[2px] bg-gray-300 h-6 hidden lg:block flex-shrink-0"></div>
 
-        {/* Navigation Links - Scrollable */}
-        <div className="flex-1 min-w-0">
-          <div className="hidden sm:block overflow-x-auto scrollbar-hide">
-            <ul className="flex gap-3 sm:gap-6 text-gray-700 font-semibold whitespace-nowrap pb-1">
-              {navList.map((item) => (
-                <li key={item} className="flex-shrink-0">
+          {/* Navigation Links - Scrollable */}
+          <div className="flex-1 min-w-0">
+            <div className="hidden sm:block overflow-x-auto scrollbar-hide">
+              <ul className="flex gap-3 sm:gap-6 text-gray-700 font-semibold whitespace-nowrap pb-1">
+                {navList.map((item) => (
+                  <li key={item} className="flex-shrink-0">
+                    <ButtonBase
+                      component={Link}
+                      to={`/${item.toLowerCase()}`}
+                      className="!px-2 !py-1 !rounded-md hover:bg-gray-200 transition-all duration-200 text-sm link "
+                    >
+                      {item}
+                    </ButtonBase>
+                  </li>
+                ))}
+                <li className="flex-shrink-0 relative">
                   <ButtonBase
                     component={Link}
-                    to={`/${item.toLowerCase()}`}
+                    to={`/offers}`}
                     className="!px-2 !py-1 !rounded-md hover:bg-gray-200 transition-all duration-200 text-sm link "
                   >
-                    {item}
+                    Offers
                   </ButtonBase>
+                  <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full top-[100%]">
+                    20% OFF
+                  </span>
                 </li>
-              ))}
-            </ul>
+              </ul>
+            </div>
+          </div>
+
+          {/* User Profile Section */}
+          <div className="flex-shrink-0">
+            <div className="!text-black !text-sm !font-semibold hidden md:flex items-center gap-2 lg:gap-4 pr-2">
+              <span className="hidden lg:inline whitespace-nowrap">
+                Hi, Harshit!
+              </span>
+              <ButtonBase
+                component="label"
+                role={undefined}
+                tabIndex={-1}
+                aria-label="Avatar image"
+                sx={{
+                  borderRadius: "40px",
+                  "&:has(:focus-visible)": {
+                    outline: "2px solid",
+                    outlineOffset: "2px",
+                  },
+                }}
+              >
+                <Avatar
+                  alt="Upload new avatar"
+                  src={avatarSrc}
+                  sx={{ width: 32, height: 32 }}
+                />
+                <input
+                  type="file"
+                  accept="image/*"
+                  style={{
+                    border: 0,
+                    clip: "rect(0 0 0 0)",
+                    height: "1px",
+                    margin: "-1px",
+                    overflow: "hidden",
+                    padding: 0,
+                    position: "absolute",
+                    whiteSpace: "nowrap",
+                    width: "1px",
+                  }}
+                  onChange={handleAvatarChange}
+                />
+              </ButtonBase>
+            </div>
+
+            {/* Mobile Avatar Only */}
+            <div className="md:hidden">
+              <ButtonBase
+                component="label"
+                role={undefined}
+                tabIndex={-1}
+                aria-label="Avatar image"
+                sx={{
+                  borderRadius: "40px",
+                  "&:has(:focus-visible)": {
+                    outline: "2px solid",
+                    outlineOffset: "2px",
+                  },
+                }}
+              >
+                <Avatar
+                  alt="Upload new avatar"
+                  src={avatarSrc}
+                  sx={{ width: 28, height: 28 }}
+                />
+                <input
+                  type="file"
+                  accept="image/*"
+                  style={{
+                    border: 0,
+                    clip: "rect(0 0 0 0)",
+                    height: "1px",
+                    margin: "-1px",
+                    overflow: "hidden",
+                    padding: 0,
+                    position: "absolute",
+                    whiteSpace: "nowrap",
+                    width: "1px",
+                  }}
+                  onChange={handleAvatarChange}
+                />
+              </ButtonBase>
+            </div>
           </div>
         </div>
 
-        {/* User Profile Section */}
-        <div className="flex-shrink-0">
-          <div className="!text-black !text-sm !font-semibold hidden md:flex items-center gap-2 lg:gap-4 pr-2">
-            <span className="hidden lg:inline whitespace-nowrap">
-              Hi, Harshit!
-            </span>
-            <ButtonBase
-              component="label"
-              role={undefined}
-              tabIndex={-1}
-              aria-label="Avatar image"
-              sx={{
-                borderRadius: "40px",
-                "&:has(:focus-visible)": {
-                  outline: "2px solid",
-                  outlineOffset: "2px",
-                },
-              }}
-            >
-              <Avatar
-                alt="Upload new avatar"
-                src={avatarSrc}
-                sx={{ width: 32, height: 32 }}
-              />
-              <input
-                type="file"
-                accept="image/*"
-                style={{
-                  border: 0,
-                  clip: "rect(0 0 0 0)",
-                  height: "1px",
-                  margin: "-1px",
-                  overflow: "hidden",
-                  padding: 0,
-                  position: "absolute",
-                  whiteSpace: "nowrap",
-                  width: "1px",
-                }}
-                onChange={handleAvatarChange}
-              />
-            </ButtonBase>
-          </div>
-
-          {/* Mobile Avatar Only */}
-          <div className="md:hidden">
-            <ButtonBase
-              component="label"
-              role={undefined}
-              tabIndex={-1}
-              aria-label="Avatar image"
-              sx={{
-                borderRadius: "40px",
-                "&:has(:focus-visible)": {
-                  outline: "2px solid",
-                  outlineOffset: "2px",
-                },
-              }}
-            >
-              <Avatar
-                alt="Upload new avatar"
-                src={avatarSrc}
-                sx={{ width: 28, height: 28 }}
-              />
-              <input
-                type="file"
-                accept="image/*"
-                style={{
-                  border: 0,
-                  clip: "rect(0 0 0 0)",
-                  height: "1px",
-                  margin: "-1px",
-                  overflow: "hidden",
-                  padding: 0,
-                  position: "absolute",
-                  whiteSpace: "nowrap",
-                  width: "1px",
-                }}
-                onChange={handleAvatarChange}
-              />
-            </ButtonBase>
-          </div>
-        </div>
+        {/* Custom CSS for hiding scrollbar */}
+        <style jsx>{`
+          .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
+          .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+          }
+        `}</style>
+        <DrawerBox
+          isOpenCatPanel={isOpenCatPanel}
+          openCategoryPanel={openCategoryPanel}
+        />
       </div>
-
-      {/* Custom CSS for hiding scrollbar */}
-      <style jsx>{`
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
-      <DrawerBox isOpenCatPanel={isOpenCatPanel} openCategoryPanel={openCategoryPanel} />
     </>
   );
 };
