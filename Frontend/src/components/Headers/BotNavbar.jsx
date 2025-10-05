@@ -115,7 +115,7 @@ const BotNavbar = () => {
                   >
                     Offers
                   </ButtonBase>
-                  <ul className="absolute top-full left-0 bg-white shadow-md text-black min-w-[150px] mt-2 flex flex-col gap-2 p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <ul className="absolute z-10 top-full left-0 bg-white shadow-md text-black min-w-[150px] mt-2 flex flex-col gap-2 p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <li>
                       <Button
                         component={Link}
