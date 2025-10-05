@@ -1,3 +1,27 @@
 .category-panel .MuiButton-root {
   text-transform: capitalize !important;
 }
+
+.submenu {
+  display: none;
+}
+
+.menu:hover .submenu {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+}
+.innersubmenu {
+  display: none;
+}
+.submenu .item2:hover .innersubmenu {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  z-index: 10;
+}

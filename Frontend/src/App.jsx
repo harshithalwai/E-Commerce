@@ -1,11 +1,13 @@
-import React from "react";
-import { TopNavbar, MidNavbar,BotNavbar } from "./components/index.js";
+import { Routes, Route } from "react-router-dom";
+import { Navbar } from "./components/index.js";
+import {Home} from "./Pages/index.js";
 const App = () => {
   return (
     <>
-      <TopNavbar />
-      <MidNavbar />
-      <BotNavbar />
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
     </>
   );
 };

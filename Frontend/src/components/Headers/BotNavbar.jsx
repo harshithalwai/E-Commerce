@@ -43,8 +43,6 @@ const BotNavbar = () => {
     <>
       <div className="bg-white">
         <div className="container py-3 flex items-center gap-2 sm:gap-5 text-sm font-semibold">
-          {/* Category Button */}
-          {/* Category Button */}
           <div className="flex-shrink-0">
             <ButtonBase
               onClick={openCategoryPanel}
@@ -64,7 +62,7 @@ const BotNavbar = () => {
 
           {/* Navigation Links - Scrollable */}
           <div className="flex-1 min-w-0">
-            <div className="hidden sm:block overflow-x-auto scrollbar-hide">
+            <div className="hidden sm:block  scrollbar-hide">
               <ul className="flex gap-3 sm:gap-6 text-gray-700 font-semibold whitespace-nowrap pb-1">
                 {navList.map((item) => (
                   <li key={item} className="flex-shrink-0">
@@ -77,7 +75,7 @@ const BotNavbar = () => {
                     </ButtonBase>
                   </li>
                 ))}
-                <li className="flex-shrink-0 relative">
+                <li className="flex-shrink-0 relative menu">
                   <ButtonBase
                     component={Link}
                     to={`/offers}`}
@@ -85,9 +83,64 @@ const BotNavbar = () => {
                   >
                     Offers
                   </ButtonBase>
-                  <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full top-[100%]">
-                    20% OFF
-                  </span>
+                  <ul className="submenu absolute !bg-white shadow-md !text-black min-w-[100px] flex flex-col gap-2">
+                    <li>
+                      <Button
+                        component={Link}
+                        to="/fashion"
+                        className="!w-full !capitalize hover:!text-[#ff5252] hover:!bg-white rounded-md !text-left  !font-[500] !text-[rgba(0,0,0,0.8)]"
+                      >
+                        Item 1
+                      </Button>
+                    </li>
+                    <li className="relative item2">
+                      <Button
+                        component={Link}
+                        to="/fashion"
+                        className="!w-full !capitalize hover:!text-[#ff5252] hover:!bg-white rounded-md !text-left  !font-[500] !text-[rgba(0,0,0,0.8)]"
+                      >
+                        Item 2
+                      </Button>
+                      <ul className="innersubmenu absolute !bg-red-500 shadow-md !text-black min-w-[100px] flex flex-col gap-2">
+                        <li>
+                          <Button
+                            component={Link}
+                            to="/fashion"
+                            className="!w-full !capitalize hover:!text-[#ff5252] hover:!bg-white rounded-md !text-left  !font-[500] !text-[rgba(0,0,0,0.8)]"
+                          >
+                            1
+                          </Button>
+                        </li>
+                        <li>
+                          <Button
+                            component={Link}
+                            to="/fashion"
+                            className="!w-full !capitalize hover:!text-[#ff5252] hover:!bg-white rounded-md !text-left  !font-[500] !text-[rgba(0,0,0,0.8)]"
+                          >
+                            2
+                          </Button>
+                        </li>
+                        <li>
+                          <Button
+                            component={Link}
+                            to="/fashion"
+                            className="!w-full !capitalize hover:!text-[#ff5252] hover:!bg-white rounded-md !text-left  !font-[500] !text-[rgba(0,0,0,0.8)]"
+                          >
+                            3
+                          </Button>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <Button
+                        component={Link}
+                        to="/fashion"
+                        className="!w-full !capitalize hover:!text-[#ff5252] hover:!bg-white rounded-md !text-left  !font-[500] !text-[rgba(0,0,0,0.8)]"
+                      >
+                        Item 3
+                      </Button>
+                    </li>
+                  </ul>
                 </li>
               </ul>
             </div>
