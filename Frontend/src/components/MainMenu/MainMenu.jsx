@@ -84,9 +84,15 @@ const MainMenu = () => {
             </Box>
           </div>
         </div>
-        <Products category={categories[value]} />
+
         <BannerSlider />
-        <DisplayBar/>
+        <Products category={categories[value]} />
+
+        <DisplayBar />
+        <div className="mt-10 font-semibold">
+          <h2 className="text-xl">Latest Products</h2>
+          <Products category={categories[value]} />
+        </div>
       </div>
     </div>
   );
