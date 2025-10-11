@@ -10,6 +10,7 @@ import MainMenu from "./MainMenu/MainMenu.jsx";
 import Products from "./Products/Products.jsx";
 import ProductCard from "./Products/ProductCard.jsx";
 import BannerSlider from "./BannerSlider/BannerSlider.jsx";
+import DisplayBar from "./DisplayBar/DisplayBar.jsx";
 export {
     Navbar,
     TopNavbar,
@@ -20,6 +21,7 @@ export {
     HomeCatSlider,
     BannerSlider,
     Products,
+    DisplayBar,
     ProductCard,
     Footer,
     Loader,

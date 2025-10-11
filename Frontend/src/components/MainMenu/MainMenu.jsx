@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import "./MainMenu.css";
-import { Products } from "../index.js";
+import { BannerSlider, DisplayBar, Products } from "../index.js";
 
 const categories = [
   "All",
@@ -33,7 +33,7 @@ const MainMenu = () => {
   };
 
   return (
-    <div className="pt-10 pb-20 bg-white ">
+    <div className="pt-10  bg-white ">
       <div className="container mx-auto px-4">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
@@ -49,42 +49,44 @@ const MainMenu = () => {
           {/* Tabs Section */}
           <div className="w-[60%]">
             <Box
-            sx={{
-              maxWidth: "100%",
-              bgcolor: "background.paper",
-            }}
-          >
-            <Tabs
-              value={value}
-              onChange={handleChange}
-              variant="scrollable"
-              scrollButtons={isMobile ? false : "auto"} // hide buttons on small devices
-              allowScrollButtonsMobile
-              aria-label="product categories"
               sx={{
-                "& .MuiTab-root.Mui-selected": { color: "#ef4444" },
-                "& .MuiTabs-indicator": { backgroundColor: "#ef4444" },
-                "& .MuiTab-root": {
-                  fontWeight: 500,
-                  textTransform: "none",
-                  fontSize: "0.95rem",
-                  minWidth: "auto",
-                  px: 2,
-                },
-                "& .MuiTabs-scrollButtons": {
-                  color: "#ef4444",
-                  "&.Mui-disabled": { opacity: 0.3 },
-                },
+                maxWidth: "100%",
+                bgcolor: "background.paper",
               }}
             >
-              {categories.map((cat, index) => (
-                <Tab key={index} label={cat} />
-              ))}
-            </Tabs>
-          </Box>
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                variant="scrollable"
+                scrollButtons={isMobile ? false : "auto"} // hide buttons on small devices
+                allowScrollButtonsMobile
+                aria-label="product categories"
+                sx={{
+                  "& .MuiTab-root.Mui-selected": { color: "#ef4444" },
+                  "& .MuiTabs-indicator": { backgroundColor: "#ef4444" },
+                  "& .MuiTab-root": {
+                    fontWeight: 500,
+                    textTransform: "none",
+                    fontSize: "0.95rem",
+                    minWidth: "auto",
+                    px: 2,
+                  },
+                  "& .MuiTabs-scrollButtons": {
+                    color: "#ef4444",
+                    "&.Mui-disabled": { opacity: 0.3 },
+                  },
+                }}
+              >
+                {categories.map((cat, index) => (
+                  <Tab key={index} label={cat} />
+                ))}
+              </Tabs>
+            </Box>
           </div>
-        </div>               
+        </div>
         <Products category={categories[value]} />
+        <BannerSlider />
+        <DisplayBar/>
       </div>
     </div>
   );
