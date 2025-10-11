@@ -1,11 +1,11 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Pagination, Navigation } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 import "./BannerSlider.css";
-export default function ProductCardsSwiper() {
+
+export default function BannerSlider({ slidesPerViewCount = 3 }) {
   const products = [
     {
       id: 1,
@@ -29,44 +29,46 @@ export default function ProductCardsSwiper() {
 
   return (
     <div className="bg-white py-5">
-      <div className="container">
+      <div className="container mx-auto px-4 relative">
+        {/* Navigation buttons */}
+        <div className="swiper-button-prev !left-0 !text-black !bg-white !rounded-full !shadow-md hover:!bg-black hover:!text-white transition-all duration-300"></div>
+        <div className="swiper-button-next !right-0 !text-black !bg-white !rounded-full !shadow-md hover:!bg-black hover:!text-white transition-all duration-300"></div>
+
         <Swiper
-          slidesPerView={3}
+          slidesPerView={slidesPerViewCount}
           spaceBetween={24}
           loop={true}
-          pagination={{
-            clickable: true,
-            dynamicBullets: true,
+          navigation={{
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
           }}
-          navigation={true}
-          modules={[Pagination, Navigation]}
+          modules={[Navigation]}
           breakpoints={{
-            320: { slidesPerView: 1, spaceBetween: 16 },
+            320: { slidesPerView: 1, spaceBetween: 12 },
+            640: { slidesPerView: 1.5, spaceBetween: 16 },
             768: { slidesPerView: 2, spaceBetween: 20 },
-            1024: { slidesPerView: 3, spaceBetween: 24 },
+            1024: { slidesPerView: slidesPerViewCount, spaceBetween: 24 },
           }}
-          className="product-swiper"
+          className="product-swiper !overflow-hidden"
         >
           {products.map((product) => (
-            <SwiperSlide key={product.id} className="relative">
-              <div className=" w-full rounded-sm overflow-hidden group shadow-lg">
-                {/* Product Image */}
+            <SwiperSlide key={product.id} className="!flex !justify-center">
+              <div className="!relative w-full max-w-[420px] rounded-lg overflow-hidden group shadow-md transition-all duration-300 hover:shadow-xl hover:scale-[1.02]">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className=" transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-auto transition-transform duration-500 group-hover:scale-110 object-cover"
                 />
 
-                {/* Content Overlay */}
-                <div className="absolute inset-0 flex items-center justify-end pr-6">
-                  <div className=" p-4 rounded-lg text-right max-w-[60%]">
-                    <h3 className="font-bold leading-tight mb-2">
+                <div className="!absolute right-2 top-0 h-full w-[50%] flex items-center justify-end">
+                  <div className="p-4 rounded-lg text-right text-black">
+                    <h3 className="font-bold leading-tight mb-1">
                       {product.name}
                     </h3>
                     <p className="font-bold text-[#ff4d4d] mb-3">
                       {product.price}
                     </p>
-                    <button className="cursor-pointer px-5 py-2 bg-black text-white hover:bg-white hover:text-black transition-all duration-300 rounded font-semibold text-sm">
+                    <button className="cursor-pointer px-4 py-2 bg-white text-black hover:bg-black hover:text-white transition-all duration-300 rounded font-semibold text-sm">
                       SHOP NOW
                     </button>
                   </div>
