@@ -12,6 +12,8 @@ import ProductCard from "./Products/ProductCard.jsx";
 import BannerSlider from "./BannerSlider/BannerSlider.jsx";
 import DisplayBar from "./DisplayBar/DisplayBar.jsx";
 import DealOfTheDay from "./DealOfDayTiming/DealOfTheDay.jsx";
+import SocialSwiper from "./SocialSwiper/SocialSwiper.jsx"
+import InstaSlider from "./InstaSlider/InstaSlider.jsx"
 export {
     Navbar,
     TopNavbar,
@@ -21,7 +23,9 @@ export {
     HomeSlider,
     HomeCatSlider,
     BannerSlider,
-     DealOfTheDay ,
+    DealOfTheDay,
+    SocialSwiper,
+    InstaSlider,
     Products,
     DisplayBar,
     ProductCard,

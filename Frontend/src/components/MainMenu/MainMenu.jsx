@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import "./MainMenu.css";
-import { BannerSlider,  DealOfTheDay,  DisplayBar, Products } from "../index.js";
+import { BannerSlider,  DealOfTheDay,  DisplayBar, InstaSlider, Products, SocialSwiper } from "../index.js";
 
 const categories = [
   "All",
@@ -133,6 +133,8 @@ const MainMenu = () => {
 
         <BannerSlider slidesPerViewCount={2} />
          <DealOfTheDay />
+         <SocialSwiper/>
+         <InstaSlider/>
       </div>
     </div>
   );

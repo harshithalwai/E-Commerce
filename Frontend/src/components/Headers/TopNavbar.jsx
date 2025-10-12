@@ -79,10 +79,10 @@ const TopNavbar = () => {
   };
 
   return (
-    <div className="top-strip bg-white border-b-2 border-[rgba(0,0,0,0.1)] py-2">
+    <div className="top-strip bg-white border-b-2 border-[rgba(0,0,0,0.1)] py-2 z-50">
       <div className="container mx-auto sm:px-6">
         <div className="flex justify-between items-center">
-          <div className="col1 w-[60%] lg:w-auto">
+          <div className="col1 w-[60%] lg:w-auto z-50">
             <p className="font-medium text-xs sm:text-sm hidden lg:block">
               Get up to 30% off new season styles, limited time only !
             </p>
@@ -92,8 +92,8 @@ const TopNavbar = () => {
             </p>
           </div>
 
-          <div className="col2 flex items-center">
-            <ul className="flex items-center space-x-2 sm:space-x-4 text-xs sm:text-sm">
+          <div className="col2 flex items-center z-50">
+            <ul className="z-50 flex items-center space-x-2 sm:space-x-4 text-xs sm:text-sm">
               <li className="!hidden sm:!block link text-[13px] ">
                 <Link to="/help-center" className="">
                   Help Center
@@ -111,7 +111,7 @@ const TopNavbar = () => {
               <div className="hz-line border bg-gray-400 !hidden lg:!block border-gray-400 w-[2px] h-[20px] "></div>
 
               {/* Country Dropdown - 3rd link (Flag + Name) */}
-              <li className="lg:relative" ref={dropdownRef}>
+              <li className="lg:relative z-50" ref={dropdownRef}>
                 <button
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                   className="flex items-center space-x-1 hover:bg-gray-100 px-2 py-1 rounded transition-colors"
@@ -182,7 +182,7 @@ const TopNavbar = () => {
                     </div>
 
                     {/* Country List */}
-                    <div className="max-h-64 overflow-y-auto">
+                    <div className="relative z-50 max-h-64 overflow-y-auto">
                       {filteredCountries.length === 0 ? (
                         <div className="p-3 text-center text-gray-500 text-sm">
                           No countries found

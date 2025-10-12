@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 
 export default function CountdownTimer() {
-  const [time, setTime] = useState({ days: 478, hours: 7, minutes: 6, seconds: 10 });
+  const [time, setTime] = useState({
+    days: 0,
+    hours: 1,
+    minutes: 30,
+    seconds: 0,
+  });
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -13,20 +18,15 @@ export default function CountdownTimer() {
         return prev;
       });
     }, 1000);
-
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <div className="flex items-center gap-1 text-red-500 text-sm font-medium">
-      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="10" strokeWidth="2" />
-        <path strokeLinecap="round" strokeWidth="2" d="M12 6v6l4 2" />
-      </svg>
-      <span>
-        {time.days} : {String(time.hours).padStart(2, "0")} :{" "}
-        {String(time.minutes).padStart(2, "0")} : {String(time.seconds).padStart(2, "0")}
-      </span>
+    <div className="flex items-center gap-1 text-white text-xs font-semibold">
+      <span>{time.days}d</span>:
+      <span>{String(time.hours).padStart(2, "0")}h</span>:
+      <span>{String(time.minutes).padStart(2, "0")}m</span>:
+      <span>{String(time.seconds).padStart(2, "0")}s</span>
     </div>
   );
 }

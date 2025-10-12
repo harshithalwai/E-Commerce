@@ -1,7 +1,9 @@
+import { useRef, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 import ProductCard from "./ProductCard";
 
 const products = [
@@ -81,38 +83,72 @@ const products = [
 ];
 
 export default function DealOfTheDay() {
-  return (
-    <div className="max-w-7xl mx-auto px-4 py-8 bg-gray-50">
-      <div className="mb-8">
-        <h2 className="text-3xl font-bold text-gray-800">Deal Of The Day</h2>
-      </div>
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+  const [swiperReady, setSwiperReady] = useState(false);
 
-      <Swiper
-        modules={[Navigation, Autoplay]}
-        spaceBetween={24}
-        slidesPerView={1}
-        navigation
-        loop
-        autoplay={{
-          delay: 3500,
-          disableOnInteraction: false,
-          pauseOnMouseEnter: true,
-        }}
-        speed={800}
-        breakpoints={{
-          640: { slidesPerView: 2, spaceBetween: 20 },
-          768: { slidesPerView: 3, spaceBetween: 20 },
-          1024: { slidesPerView: 4, spaceBetween: 24 },
-          1280: { slidesPerView: 5, spaceBetween: 24 },
-        }}
-        className="pb-12"
-      >
-        {products.map((product) => (
-          <SwiperSlide key={product.id}>
-            <ProductCard product={product} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+  useEffect(() => {
+    // Let refs get assigned before Swiper initializes navigation
+    setSwiperReady(true);
+  }, []);
+
+  return (
+    <div className="container py-10">
+      <h2 className="text-xl font-bold text-gray-800 mb-8 ">
+        Deal Of The Day
+      </h2>
+
+      <div className="flex items-center justify-center gap-4 relative">
+        {/* Left Navigation */}
+        <button
+          ref={prevRef}
+          className="swiper-button-prev-custom w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center hover:bg-gray-100 transition-all duration-300 cursor-pointer"
+        >
+          <IoChevronBack size={22} />
+        </button>
+
+        {/* Swiper */}
+        <div className="w-[90%]">
+          {swiperReady && (
+            <Swiper
+              modules={[Navigation, Autoplay]}
+              spaceBetween={24}
+              slidesPerView={1}
+              loop
+              autoplay={{
+                delay: 3500,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+              }}
+              speed={800}
+              navigation={{
+                prevEl: prevRef.current,
+                nextEl: nextRef.current,
+              }}
+              breakpoints={{
+                640: { slidesPerView: 2, spaceBetween: 20 },
+                768: { slidesPerView: 3, spaceBetween: 20 },
+                1024: { slidesPerView: 4, spaceBetween: 24 },
+                1280: { slidesPerView: 5, spaceBetween: 24 },
+              }}
+            >
+              {products.map((product) => (
+                <SwiperSlide key={product.id}>
+                  <ProductCard product={product} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          )}
+        </div>
+
+        {/* Right Navigation */}
+        <button
+          ref={nextRef}
+          className="swiper-button-next-custom w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center hover:bg-gray-100 transition-all duration-300 cursor-pointer"
+        >
+          <IoChevronForward size={22} />
+        </button>
+      </div>
     </div>
   );
 }

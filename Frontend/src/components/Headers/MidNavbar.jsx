@@ -213,7 +213,7 @@ const NotificationDropdown = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="absolute right-0 top-full mt-2 w-80 bg-white rounded-xl shadow-2xl border border-gray-100 z-50 transform transition-all duration-300 origin-top">
+    <div className="absolute right-0 top-full mt-2 w-80 bg-white rounded-xl shadow-2xl border border-gray-100 z-10 transform transition-all duration-300 origin-top">
       <div className="p-4 border-b border-gray-100">
         <h3 className="font-semibold text-gray-800">Notifications</h3>
       </div>
@@ -258,7 +258,7 @@ const MobileActionsPopup = ({
   if (!isOpen) return null;
 
   return (
-    <div className="absolute right-0 top-full mt-2 w-56 bg-white rounded-xl shadow-2xl border border-gray-100 z-50 transform transition-all duration-300 origin-top">
+    <div className="absolute right-0 top-full mt-2 w-56 bg-white rounded-xl shadow-2xl border border-gray-100 z-10 transform transition-all duration-300 origin-top">
       <div className="p-2">
         {/* Wishlist */}
         <button
@@ -363,7 +363,7 @@ const MidNavbar = () => {
   return (
     <div
       className={
-        "sticky top-0 left-0 right-0 bg-white mid-strip  z-50 border-b border-gray-100 transition-all duration-200 py-1 xl:py-2"
+        "sticky top-0 left-0 right-0 bg-white mid-strip  z-10 border-b border-gray-100 transition-all duration-200 py-1 xl:py-2"
       }
     >
       <div className="container  mx-auto ">
