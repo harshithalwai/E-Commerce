@@ -55,7 +55,7 @@ export default function EcommerceFooter() {
     else if (!agreed) alert("Please agree to the terms and conditions");
   };
 
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+  // const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
     <footer className="relative text-gray-800 transition-all duration-500">
@@ -63,13 +63,13 @@ export default function EcommerceFooter() {
       <div className="absolute inset-0 bg-gradient-to-br from-red-50 via-white to-gray-100 backdrop-blur-2xl opacity-90 -z-10" />
 
       {/* Scroll to Top Button */}
-      <button
+      {/* <button
         onClick={scrollToTop}
         className="fixed bottom-6 right-6 bg-gradient-to-r from-red-500 via-pink-500 to-orange-400 hover:from-orange-500 hover:to-red-600 text-white p-4 rounded-full shadow-[0_0_15px_rgba(255,75,75,0.6)] hover:shadow-[0_0_25px_rgba(255,75,75,0.9)] transition-all duration-300 hover:scale-110 z-50"
         aria-label="Scroll to top"
       >
         <FaChevronUp size={22} />
-      </button>
+      </button> */}
 
       {/* Feature Highlights */}
       <section className="py-12 border-b border-gray-200">

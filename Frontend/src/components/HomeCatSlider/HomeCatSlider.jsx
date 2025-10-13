@@ -24,7 +24,6 @@ const HomeCatSlider = () => {
   return (
     <div className="w-full py-4">
       <div className="container mx-auto">
-        
         <div className="flex gap-3 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-2">
           {categories.map((category, index) => (
             <Card

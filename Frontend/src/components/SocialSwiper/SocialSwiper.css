@@ -1,0 +1,33 @@
+        @keyframes shake {
+            0% {
+                transform: translateX(0) rotate(0deg);
+            }
+
+            25% {
+                transform: translateX(-4px) rotate(-1deg);
+            }
+
+            50% {
+                transform: translateX(4px) rotate(1deg);
+            }
+
+            75% {
+                transform: translateX(-2px) rotate(-0.5deg);
+            }
+
+            100% {
+                transform: translateX(0) rotate(0deg);
+            }
+        }
+
+        .hover-shake:hover {
+            animation: shake 0.6s ease-in-out;
+        }
+
+        .social-icon {
+            transition: transform .18s ease, opacity .18s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px) scale(1.06);
+        }
