@@ -14,6 +14,7 @@ import DisplayBar from "./DisplayBar/DisplayBar.jsx";
 import DealOfTheDay from "./DealOfDayTiming/DealOfTheDay.jsx";
 import SocialSwiper from "./SocialSwiper/SocialSwiper.jsx"
 import InstaSlider from "./InstaSlider/InstaSlider.jsx"
+import Breadcrumb from "./Breadcrumbs/Breadcrumb.jsx";
 export {
     Navbar,
     TopNavbar,
@@ -29,6 +30,7 @@ export {
     Products,
     DisplayBar,
     ProductCard,
+    Breadcrumb,
     Footer,
     Loader,
 };
