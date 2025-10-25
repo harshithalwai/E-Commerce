@@ -41,7 +41,7 @@ export default function SocialSwiper() {
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-2xl font-semibold">Featured</h2>
 
-        {/* Custom nav buttons placed before/after the slider visually but grouped here */}
+       
         <div className="flex gap-3 items-center">
           <button
             ref={prevRef}

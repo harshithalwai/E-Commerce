@@ -12,17 +12,25 @@ const Breadcrumb = () => {
     <>
       <div role="presentation" onClick={handleClick}>
         <Breadcrumbs aria-label="breadcrumb">
-          <Link underline="hover" color="inherit" href="/">
+          <Link
+            underline="none"
+            color="inherit"
+            href="/"
+            className="link"
+            sx={{ fontSize: ".9rem" }}
+          >
             MUI
           </Link>
           <Link
-            underline="hover"
+            sx={{ fontSize: ".9rem" }}
+            underline="none"
             color="inherit"
             href="/material-ui/getting-started/installation/"
+            className="link"
           >
             Core
           </Link>
-          <Typography sx={{ color: "text.primary" }}>Breadcrumbs</Typography>
+          <Typography sx={{ fontSize: ".9rem" }}>Breadcrumbs</Typography>
         </Breadcrumbs>
       </div>
     </>

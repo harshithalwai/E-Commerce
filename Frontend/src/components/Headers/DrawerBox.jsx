@@ -65,10 +65,10 @@ const DrawerBox = ({ isOpenCatPanel, openCategoryPanel }) => {
   const DrawerList = (
     <Box sx={{ width: 320 }} role="presentation" className="bg-white h-full">
       {/* Header */}
-      <div className="sticky top-0 bg-gradient-to-r from-gray-900 to-gray-800 text-white p-5 flex items-center justify-between shadow-lg z-10">
+      <div className="sticky top-0 bg-gradient-to-r from-[#ff5252] to-[#eb7171] text-white p-5 flex items-center justify-between shadow-lg z-10">
         <h3 className="text-lg font-bold">Shop By Category</h3>
         <button
-          className="cursor-pointer hover:rotate-90 transition-transform duration-300 text-white hover:text-red-400"
+          className="cursor-pointer hover:rotate-90 transition-transform duration-300 text-white "
           onClick={openCategoryPanel}
         >
           <GiCrossMark size={20} />
@@ -137,10 +137,14 @@ const DrawerBox = ({ isOpenCatPanel, openCategoryPanel }) => {
                           {sub.items.map((item, itemIndex) => (
                             <li key={itemIndex}>
                               <Button
+                                sx={{
+                                  justifyContent: "flex-start",
+                                  paddingLeft: 4,
+                                }}
                                 onClick={() =>
                                   console.log(`Navigate to: ${item}`)
                                 }
-                                className="!w-full !text-left !capitalize hover:!text-red-500 hover:!bg-red-50 !rounded-lg  !py-2 !font-normal !text-gray-600 transition-all"
+                                className="!w-full  !capitalize hover:!text-red-500 hover:!bg-red-50 !rounded-lg  !py-2 !font-normal !text-gray-600 transition-all"
                               >
                                 {item}
                               </Button>
