@@ -58,3 +58,21 @@ body {
   scrollbar-width: thin; 
   scrollbar-color: #ff5252 transparent;
 }
+
+.grid-cont{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 16px;
+}
+
+/* Add this to your global CSS or Tailwind custom layer */
+.thumbnail-swiper .swiper-button-prev,
+.thumbnail-swiper .swiper-button-next {
+  color: #ff5252 !important;
+  transition: 0.3s ease;
+}
+
+.thumbnail-swiper .swiper-button-prev:hover,
+.thumbnail-swiper .swiper-button-next:hover {
+  color: #ff7b7b !important;
+}

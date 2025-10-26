@@ -1,85 +1,23 @@
 import React, { useState } from "react";
-import { Breadcrumb } from "../../components/index.js";
+import {
+  Breadcrumb,
+  PriceRangeSlider,
+  GridProductBox,
+} from "../../components/index.js";
 import { FiMinusSquare } from "react-icons/fi";
 import { FaRegSquarePlus } from "react-icons/fa6";
-import Slider from "@mui/material/Slider";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-
-function PriceRangeSlider({ min = 0, max = 500, step = 5 }) {
-  const [priceRange, setPriceRange] = useState([37, 94]);
-
-  const handleSliderChange = (event, newValue) => {
-    setPriceRange(newValue);
-  };
-
-  const handleInputChange = (index, value) => {
-    const newRange = [...priceRange];
-    newRange[index] = Number(value);
-    if (
-      newRange[0] <= newRange[1] &&
-      newRange[0] >= min &&
-      newRange[1] <= max
-    ) {
-      setPriceRange(newRange);
-    }
-  };
-
-  return (
-    <Box className="w-full  ">
-      <h3 className="text-lg font-medium text-gray-900  px-4 py-3">Price</h3>
-      <Slider
-        value={priceRange}
-        onChange={handleSliderChange}
-        min={min}
-        max={max}
-        step={step}
-        valueLabelDisplay="auto"
-        marks={[
-          { value: min, label: `$${min}` },
-          { value: max, label: `$${max}` },
-        ]}
-        sx={{
-          color: "#ef4444", // red-500
-          height: 6,
-          "& .MuiSlider-thumb": {
-            width: 24,
-            height: 24,
-            backgroundColor: "#fff",
-            border: "2px solid currentColor",
-            "&:hover": { boxShadow: "0 0 0 8px rgba(239, 68, 68, 0.16)" },
-          },
-          "& .MuiSlider-track": { border: "none", borderRadius: 2 },
-          "& .MuiSlider-rail": {
-            opacity: 1,
-            backgroundColor: "#d1d5db",
-            borderRadius: 2,
-          },
-        }}
-      />
-      <p className="mt-2 text-sm text-gray-700">
-        Selected range: ${priceRange[0].toFixed(2)} - $
-        {priceRange[1].toFixed(2)}
-      </p>
-    </Box>
-  );
-}
 
 const ProductListing = () => {
   const [subMenuIndex, setSubMenuIndex] = useState(null);
-
-  // Controlled state for checkboxes
   const [filters, setFilters] = useState({});
 
-  const toggleSubMenu = (index) => {
+  const toggleSubMenu = (index) =>
     setSubMenuIndex(index === subMenuIndex ? null : index);
-  };
 
   const handleCheckboxChange = (categoryName, optionValue) => {
     setFilters((prev) => {
       const categoryFilters = prev[categoryName] || [];
       const isChecked = categoryFilters.includes(optionValue);
-
       return {
         ...prev,
         [categoryName]: isChecked
@@ -87,6 +25,12 @@ const ProductListing = () => {
           : [...categoryFilters, optionValue],
       };
     });
+  };
+
+  const clearAllFilters = () => {
+    setFilters({});
+    setSubMenuIndex(null);
+    console.log("All filters cleared!");
   };
 
   const categories = [
@@ -150,12 +94,6 @@ const ProductListing = () => {
     },
   ];
 
-  const clearAllFilters = () => {
-    setFilters({});
-    setSubMenuIndex(null);
-    console.log("All filters cleared!");
-  };
-
   return (
     <div className="pt-4">
       <div className="container pb-4">
@@ -166,8 +104,8 @@ const ProductListing = () => {
         <div className="container">
           <div className="min-h-screen p-6 flex gap-6">
             {/* Sidebar Filters */}
-            <div className="w-1/3 h-full max-h-screen overflow-y-auto bg-white rounded-lg p-6 shadow-sm scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-gray-100 flex flex-col">
-              <div className="flex items-center justify-between mb-5 ">
+            <div className="w-1/4 max-h-screen overflow-y-auto bg-white rounded-lg p-6 shadow-sm scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-gray-100 flex flex-col">
+              <div className="flex items-center justify-between mb-5">
                 <h2 className="text-xl font-semibold">Filter By</h2>
                 <button
                   onClick={clearAllFilters}
@@ -176,29 +114,28 @@ const ProductListing = () => {
                   <span>✖️</span> Clear All
                 </button>
               </div>
-              <div className="w-full rounded-sm bg-gray-500 h-[1.5px]"></div>
+              <div className="w-full h-[1.5px] bg-gray-500 mb-3"></div>
+
               <div className="flex-1">
-                {categories.map((category, categoryIndex) => (
+                {categories.map((category, i) => (
                   <div
-                    key={categoryIndex}
-                    className=" rounded-lg transition-all overflow-hidden"
+                    key={i}
+                    className="rounded-lg transition-all overflow-hidden mb-2"
                   >
-                    {/* Category Header */}
                     <div
-                      className="flex items-center justify-between cursor-pointer px-4 py-3 "
-                      onClick={() => toggleSubMenu(categoryIndex)}
+                      className="flex items-center justify-between cursor-pointer px-4 py-3"
+                      onClick={() => toggleSubMenu(i)}
                     >
                       <h3 className="font-semibold">{category.name}</h3>
-                      {subMenuIndex === categoryIndex ? (
+                      {subMenuIndex === i ? (
                         <FiMinusSquare className="text-red-500" size={20} />
                       ) : (
                         <FaRegSquarePlus className="text-gray-500" size={20} />
                       )}
                     </div>
 
-                    {/* Submenu with controlled checkboxes */}
-                    {subMenuIndex === categoryIndex && (
-                      <div className="px-4 py-3 animate-fadeIn">
+                    {subMenuIndex === i && (
+                      <div className="px-4 py-2 animate-fadeIn">
                         {category.submenu.map((option) => (
                           <label
                             key={option.value}
@@ -241,9 +178,42 @@ const ProductListing = () => {
             </div>
 
             {/* Main Content */}
-            <div className="w-full h-full max-h-screen overflow-y-auto bg-white p-6 shadow-sm">
-              {/* Product grid or list will go here */}
-              <p className="text-gray-500">Products content goes here...</p>
+            <div className="w-full h-full flex flex-col">
+              <div className="pb-4">
+                <h1 className="text-2xl font-bold mb-2">Smart Tablet</h1>
+                <p className="text-gray-600 text-sm">
+                  Many desktop publishing packages and web page editors now use
+                  Lorem Ipsum as their default model text, and a search for
+                  'lorem ipsum' will uncover many web sites still in their.
+                </p>
+              </div>
+              <div className="w-full h-[1.5px] bg-gray-500 mb-4"></div>
+              <div className="flex-1 max-h-screen overflow-y-auto">
+                <div className="grid-cont">
+                  {Array.from({ length: 23 }).map((_, idx) => (
+                    <GridProductBox key={idx} />
+                  ))}
+                </div>
+              </div>
+              <div className="w-full h-[30px] mt-5 flex items-center justify-between">
+                <h3 className="text-sm text-gray-600">
+                  Showing 1-18 of 18 items
+                </h3>
+                <div className="flex items-center gap-2">
+                  <button className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded hover:bg-red-500 hover:text-white hover:border-red-500 transition-colors duration-300">
+                    1
+                  </button>
+                  <button className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded hover:bg-red-500 hover:text-white hover:border-red-500 transition-colors duration-300">
+                    2
+                  </button>
+                  <button className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded hover:bg-red-500 hover:text-white hover:border-red-500 transition-colors duration-300">
+                    3
+                  </button>
+                  <button className="w-8 h-8 flex items-center justify-center border border-gray-300 rounded hover:bg-red-500 hover:text-white hover:border-red-500 transition-colors duration-300">
+                    →
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
