@@ -17,6 +17,7 @@ import InstaSlider from "./InstaSlider/InstaSlider.jsx"
 import Breadcrumb from "./Breadcrumbs/Breadcrumb.jsx";
 import PriceRangeSlider from "./PriceRangeSlider/PriceRangeSlider.jsx";
 import GridProductBox from "./ProductBoxs/GridProductBox.jsx";
+import ProductDetailsCont from "./ProductDetailsCont/ProductDetailsCont.jsx";
 export {
     Navbar,
     TopNavbar,
@@ -35,6 +36,7 @@ export {
     Breadcrumb,
     PriceRangeSlider,
     GridProductBox,
+    ProductDetailsCont,
     Footer,
     Loader,
 };
