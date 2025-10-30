@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { MdCompare, MdFullscreen } from "react-icons/md";
+import { FiShoppingCart } from "react-icons/fi";
 
 const ProductCard = ({
   image,
@@ -12,10 +15,11 @@ const ProductCard = ({
   colors = [],
 }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
   const [selectedColor, setSelectedColor] = useState(0);
 
   const renderStars = (rating) => (
-    <div className="flex gap-1">
+    <div className="flex gap-1 mt-1">
       {[1, 2, 3, 4, 5].map((star) => (
         <svg
           key={star}
@@ -32,7 +36,7 @@ const ProductCard = ({
 
   return (
     <div
-      className="relative bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 cursor-pointer group"
+      className="relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 cursor-pointer group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -40,7 +44,7 @@ const ProductCard = ({
       {badge && (
         <div className="absolute top-3 left-3 z-10">
           <span
-            className={`px-2 py-1 text-xs font-bold rounded ${
+            className={`px-2 py-1 text-xs font-semibold rounded-lg shadow-sm ${
               badge.type === "discount"
                 ? "bg-red-500 text-white"
                 : "bg-green-500 text-white"
@@ -51,7 +55,7 @@ const ProductCard = ({
         </div>
       )}
 
-      {/* Image Container */}
+      {/* Image Section */}
       <div
         className="relative bg-gray-50 overflow-hidden"
         style={{ paddingBottom: "100%" }}
@@ -80,32 +84,38 @@ const ProductCard = ({
             isHovered ? "opacity-100 translate-x-0" : "opacity-0 translate-x-4"
           }`}
         >
-          {/* Buttons */}
-          {["wishlist", "compare", "quick view", "cart"].map((type, i) => {
-            const colors = ["red", "blue", "purple", "green"];
-            const icons = [
-              "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z",
-              "M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4",
-              "M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z",
-              "M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z",
-            ];
-            return (
-              <button
-                key={i}
-                className={`cursor-pointer w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center transition-all duration-300 hover:bg-${colors[i]}-500 hover:text-white hover:scale-110`}
-              >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  dangerouslySetInnerHTML={{
-                    __html: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${icons[i]}" />`,
-                  }}
-                />
-              </button>
-            );
-          })}
+          <button
+            onClick={() => setIsFavorite(!isFavorite)}
+            className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-red-500 hover:text-white transition-all duration-200"
+            aria-label="Add to favorites"
+          >
+            {isFavorite ? (
+              <AiFillHeart
+                size={20}
+                className="text-red-500 group-hover:text-white transition-all"
+              />
+            ) : (
+              <AiOutlineHeart size={20} />
+            )}
+          </button>
+          <button
+            className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-blue-500 hover:text-white transition-all duration-200"
+            aria-label="Compare"
+          >
+            <MdCompare size={20} />
+          </button>
+          <button
+            className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-blue-500 hover:text-white transition-all duration-200"
+            aria-label="Fullscreen View"
+          >
+            <MdFullscreen size={20} />
+          </button>
+          <button
+            className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-green-500 hover:text-white transition-all duration-200"
+            aria-label="Add to Cart"
+          >
+            <FiShoppingCart size={20} />
+          </button>
         </div>
 
         {/* Color Options */}
@@ -124,9 +134,10 @@ const ProductCard = ({
                 className={`w-6 h-6 rounded-full border-2 transition-transform ${
                   selectedColor === index
                     ? "border-gray-800 scale-110"
-                    : "border-white"
+                    : "border-gray-200"
                 }`}
                 style={{ backgroundColor: color }}
+                aria-label={`Select color ${color}`}
               />
             ))}
           </div>
