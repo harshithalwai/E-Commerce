@@ -20,7 +20,6 @@ const mailBody = (to) => {
         },
         to,
         subject: " Welcome to Classy Shop! 🎉 Your Subscription is Confirmed !",
-        text: "Hello world !",
         html: `
         <div style="font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f7f7f7; padding: 40px;">
             <table align="center" width="600" style="background: #ffffff; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); padding: 40px;">

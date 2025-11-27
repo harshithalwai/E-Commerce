@@ -55,50 +55,52 @@ const BotNavbar = () => {
           <div className="w-[2px] bg-gray-300 h-6 hidden lg:block flex-shrink-0"></div>
 
           {/* Navigation Links */}
-          <div className="flex-1 min-w-0 ">
-            <div className="hidden sm:block  scrollbar-hide relative">
-              <ul className="flex gap-2  text-gray-700 font-semibold whitespace-nowrap pb-1">
+          <div className="flex-1 min-w-0">
+            <div className="hidden sm:block scrollbar-hide relative">
+              <ul className="flex gap-2 text-gray-700 font-semibold whitespace-nowrap pb-1">
                 {navList.map((item) => (
-                  <li key={item} className="link  flex-shrink-0 relative group">
+                  <li key={item} className="link flex-shrink-0 relative group">
                     <ButtonBase
                       component={Link}
                       to={`/${item.toLowerCase()}`}
-                      className="!font-semibold !px-2 !py-1 !rounded-md hover:bg-gray-200 transition-all duration-200 text-sm flex items-center gap-1"
+                      className="!font-semibold !px-2 !py-1 !rounded-md hover:bg-gray-200 hover:!text-[#ff5252] transition-all duration-200 text-sm flex items-center gap-1"
                     >
                       {item}
                     </ButtonBase>
 
-                    {/* Submenu */}
+                    {/* Submenu with bridge */}
                     {item === "Fashion" && (
-                      <ul className="absolute top-full left-0 bg-white shadow-md text-black min-w-[120px] flex flex-col gap-2 p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
-                        <li>
-                          <Button
-                            component={Link}
-                            to="/fashion/item1"
-                            className="!w-full !capitalize hover:!text-[#ff5252] hover:!bg-white rounded-md !text-left !font-[500] !text-[rgba(0,0,0,0.8)]"
-                          >
-                            Item 1
-                          </Button>
-                        </li>
-                        <li>
-                          <Button
-                            component={Link}
-                            to="/fashion/item2"
-                            className="!w-full !capitalize hover:!text-[#ff5252] hover:!bg-white rounded-md !text-left !font-[500] !text-[rgba(0,0,0,0.8)]"
-                          >
-                            Item 2
-                          </Button>
-                        </li>
-                        <li>
-                          <Button
-                            component={Link}
-                            to="/fashion/item3"
-                            className="!w-full !capitalize hover:!text-[#ff5252] hover:!bg-white rounded-md !text-left !font-[500] !text-[rgba(0,0,0,0.8)]"
-                          >
-                            Item 3
-                          </Button>
-                        </li>
-                      </ul>
+                      <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-20">
+                        <ul className="bg-white shadow-lg rounded-md text-black min-w-[140px] flex flex-col p-1">
+                          <li>
+                            <Button
+                              component={Link}
+                              to="/fashion/item1"
+                              className="!w-full !justify-start !capitalize hover:!text-[#ff5252] hover:!bg-gray-100 !rounded-md !text-left !font-[500] !text-[rgba(0,0,0,0.8)] !px-3 !py-2"
+                            >
+                              Item 1
+                            </Button>
+                          </li>
+                          <li>
+                            <Button
+                              component={Link}
+                              to="/fashion/item2"
+                              className="!w-full !justify-start !capitalize hover:!text-[#ff5252] hover:!bg-gray-100 !rounded-md !text-left !font-[500] !text-[rgba(0,0,0,0.8)] !px-3 !py-2"
+                            >
+                              Item 2
+                            </Button>
+                          </li>
+                          <li>
+                            <Button
+                              component={Link}
+                              to="/fashion/item3"
+                              className="!w-full !justify-start !capitalize hover:!text-[#ff5252] hover:!bg-gray-100 !rounded-md !text-left !font-[500] !text-[rgba(0,0,0,0.8)] !px-3 !py-2"
+                            >
+                              Item 3
+                            </Button>
+                          </li>
+                        </ul>
+                      </div>
                     )}
                   </li>
                 ))}

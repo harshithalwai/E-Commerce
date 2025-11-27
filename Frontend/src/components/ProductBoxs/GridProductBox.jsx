@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const ProductBox = ({ product, index }) => {
+const GridProductBox = ({ product, index }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [selectedColor, setSelectedColor] = useState(0);
 
@@ -180,4 +180,4 @@ const ProductBox = ({ product, index }) => {
   );
 };
 
-export default ProductBox;
+export default GridProductBox;

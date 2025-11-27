@@ -3,13 +3,19 @@ import {
   Breadcrumb,
   PriceRangeSlider,
   GridProductBox,
+  ListProductBox,
 } from "../../components/index.js";
+import GridViewIcon from "@mui/icons-material/GridView";
+import ViewListIcon from "@mui/icons-material/ViewList";
 import { FiMinusSquare } from "react-icons/fi";
 import { FaRegSquarePlus } from "react-icons/fa6";
 
 const ProductListing = () => {
   const [subMenuIndex, setSubMenuIndex] = useState(null);
   const [filters, setFilters] = useState({});
+  const [viewMode, setViewMode] = useState("grid");
+  // 'grid' or 'list'
+  const [sortBy, setSortBy] = useState("relevance");
 
   const toggleSubMenu = (index) =>
     setSubMenuIndex(index === subMenuIndex ? null : index);
@@ -101,7 +107,7 @@ const ProductListing = () => {
       </div>
 
       <div className="bg-white">
-        <div className="container">
+        <div className="">
           <div className="min-h-screen p-6 flex gap-6">
             {/* Sidebar Filters */}
             <div className="w-1/4 max-h-screen overflow-y-auto bg-white rounded-lg p-6 shadow-sm scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-gray-100 flex flex-col">
@@ -188,13 +194,78 @@ const ProductListing = () => {
                 </p>
               </div>
               <div className="w-full h-[1.5px] bg-gray-500 mb-4"></div>
-              <div className="flex-1 max-h-screen overflow-y-auto">
-                <div className="grid-cont">
-                  {Array.from({ length: 23 }).map((_, idx) => (
-                    <GridProductBox key={idx} />
-                  ))}
+
+              <div className="w-full h-[1.5px] bg-gray-300 mb-4"></div>
+
+              {/* Toolbar */}
+              <div className="flex items-center justify-between mb-6">
+                {/* View Toggle & Product Count */}
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2 border border-gray-300 rounded-lg p-1">
+                    <button
+                      onClick={() => setViewMode("grid")}
+                      className={`p-2 rounded transition-all ${
+                        viewMode === "grid"
+                          ? "bg-red-500 text-white"
+                          : "text-gray-600 hover:bg-gray-100"
+                      }`}
+                      title="Grid View"
+                    >
+                      <GridViewIcon fontSize="small" />
+                    </button>
+                    <button
+                      onClick={() => setViewMode("list")}
+                      className={`p-2 rounded transition-all ${
+                        viewMode === "list"
+                          ? "bg-red-500 text-white"
+                          : "text-gray-600 hover:bg-gray-100"
+                      }`}
+                      title="List View"
+                    >
+                      <ViewListIcon fontSize="small" />
+                    </button>
+                  </div>
+                  <p className="text-sm text-gray-600">
+                    There are 18 products.
+                  </p>
+                </div>
+
+                {/* Sort Dropdown */}
+                <div className="flex items-center gap-2">
+                  <label className="text-sm font-medium text-gray-700">
+                    Sort by:
+                  </label>
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                    className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-500 cursor-pointer"
+                  >
+                    <option value="relevance">Relevance</option>
+                    <option value="sales">Sales, highest to lowest</option>
+                    <option value="name-asc">Name, A to Z</option>
+                    <option value="name-desc">Name, Z to A</option>
+                    <option value="price-asc">Price, low to high</option>
+                    <option value="price-desc">Price, high to low</option>
+                  </select>
                 </div>
               </div>
+
+              <div className="flex-1 max-h-screen overflow-y-auto">
+                {viewMode === "grid" ? (
+                  <div className="grid-cont">
+                    {Array.from({ length: 18 }).map((_, idx) => (
+                      <GridProductBox key={idx} />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="flex flex-col">
+                    {Array.from({ length: 18 }).map((_, idx) => (
+                      <ListProductBox key={idx} />
+                    ))}
+                  </div>
+                )}
+              </div>
+
               <div className="w-full h-[30px] mt-5 flex items-center justify-between">
                 <h3 className="text-sm text-gray-600">
                   Showing 1-18 of 18 items

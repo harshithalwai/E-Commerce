@@ -17,6 +17,7 @@ import InstaSlider from "./InstaSlider/InstaSlider.jsx"
 import Breadcrumb from "./Breadcrumbs/Breadcrumb.jsx";
 import PriceRangeSlider from "./PriceRangeSlider/PriceRangeSlider.jsx";
 import GridProductBox from "./ProductBoxs/GridProductBox.jsx";
+import ListProductBox from "./ProductBoxs/ListProductBox.jsx";
 import ProductDetailsCont from "./ProductDetailsCont/ProductDetailsCont.jsx";
 export {
     Navbar,
@@ -36,7 +37,11 @@ export {
     Breadcrumb,
     PriceRangeSlider,
     GridProductBox,
+    ListProductBox,
     ProductDetailsCont,
     Footer,
     Loader,
 };
+
+import StoreContextProvider from "./context/storeContext/storeProvider.jsx";
+export { StoreContextProvider };
