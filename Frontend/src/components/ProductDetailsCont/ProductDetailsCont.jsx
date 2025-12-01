@@ -19,11 +19,11 @@ const ProductDetailsCont = () => {
   ];
 
   const images = [
-    "https://demos.codezeel.com/prestashop/PRS21/PRS210502/29-medium_default/hummingbird-printed-t-shirt.jpg",
-    "https://demos.codezeel.com/prestashop/PRS21/PRS210502/25-medium_default/hummingbird-printed-t-shirt.jpg",
-    "https://demos.codezeel.com/prestashop/PRS21/PRS210502/24-medium_default/hummingbird-printed-t-shirt.jpg",
-    "https://demos.codezeel.com/prestashop/PRS21/PRS210502/27-medium_default/hummingbird-printed-t-shirt.jpg",
-    "https://demos.codezeel.com/prestashop/PRS21/PRS210502/28-medium_default/hummingbird-printed-t-shirt.jpg",
+    "/watch1.png",
+    "/watch2.png",
+    "/watch1.png",
+    "/watch1.png",
+    "/watch1.png",
   ];
 
   const colors = [
@@ -57,7 +57,7 @@ const ProductDetailsCont = () => {
             <InnerImageZoom
               src={images[selectedImage]}
               zoomType="hover"
-              zoomScale={1.3}
+              zoomScale={2}
               alt="Product"
             />
             <button className="absolute top-4 right-4 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100 opacity-0 group-hover:opacity-100 transition">
