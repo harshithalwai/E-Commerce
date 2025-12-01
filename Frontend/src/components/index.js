@@ -19,6 +19,7 @@ import PriceRangeSlider from "./PriceRangeSlider/PriceRangeSlider.jsx";
 import GridProductBox from "./ProductBoxs/GridProductBox.jsx";
 import ListProductBox from "./ProductBoxs/ListProductBox.jsx";
 import ProductDetailsCont from "./ProductDetailsCont/ProductDetailsCont.jsx";
+import Model from "./Model/Model.jsx";
 export {
     Navbar,
     TopNavbar,
@@ -41,6 +42,7 @@ export {
     ProductDetailsCont,
     Footer,
     Loader,
+    Model,
 };
 
 import StoreContextProvider from "./context/storeContext/storeProvider.jsx";

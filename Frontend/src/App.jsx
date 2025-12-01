@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import { Footer, Navbar } from "./components/index.js";
+import { Footer, Model, Navbar } from "./components/index.js";
 import {Home, ProductListing,ProductDetails} from "./Pages/index.js";
+import Pra from "../Pra.jsx";
 const App = () => {
   return (
     <>
@@ -8,9 +9,11 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/productlisting" element={<ProductListing />} />
+        <Route path="/pra" element={<Pra />} />
         <Route path="/product/:id" element={<ProductDetails />} />
       </Routes>
       <Footer />
+      <Model />
     </>
   );
 };

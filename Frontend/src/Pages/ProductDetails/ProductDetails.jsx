@@ -212,7 +212,7 @@ const ProductPage = () => {
                 <div className="text-center">
                   <div className="font-semibold text-sm text-gray-900">
                     Marco
-                  </div>
+                                      </div>
                   <div className="text-xs text-gray-500">03/05/2023</div>
                 </div>
               </div>
