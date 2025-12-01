@@ -12,7 +12,8 @@ import {
   FaInstagram,
   FaTwitter,
 } from "react-icons/fa";
-
+import axios from "axios";
+import { toast } from "react-toastify";
 export default function EcommerceFooter() {
   const [formData, setFormData] = useState({
     email: "",
@@ -21,11 +22,31 @@ export default function EcommerceFooter() {
 
   // Feature list
   const features = [
-    { icon: <FaTruck className="w-8 h-8" />, title: "Free Shipping", subtitle: "Orders Over $100" },
-    { icon: <FaUndo className="w-8 h-8" />, title: "30 Days Returns", subtitle: "Easy Exchanges" },
-    { icon: <FaWallet className="w-8 h-8" />, title: "Secure Payment", subtitle: "100% Protected" },
-    { icon: <FaGift className="w-8 h-8" />, title: "Special Gifts", subtitle: "First Order Bonus" },
-    { icon: <FaHeadset className="w-8 h-8" />, title: "24/7 Support", subtitle: "We’re Here Always" },
+    {
+      icon: <FaTruck className="w-8 h-8" />,
+      title: "Free Shipping",
+      subtitle: "Orders Over $100",
+    },
+    {
+      icon: <FaUndo className="w-8 h-8" />,
+      title: "30 Days Returns",
+      subtitle: "Easy Exchanges",
+    },
+    {
+      icon: <FaWallet className="w-8 h-8" />,
+      title: "Secure Payment",
+      subtitle: "100% Protected",
+    },
+    {
+      icon: <FaGift className="w-8 h-8" />,
+      title: "Special Gifts",
+      subtitle: "First Order Bonus",
+    },
+    {
+      icon: <FaHeadset className="w-8 h-8" />,
+      title: "24/7 Support",
+      subtitle: "We’re Here Always",
+    },
   ];
 
   const handleChange = (e) => {
@@ -50,7 +71,10 @@ export default function EcommerceFooter() {
       <section className="py-12 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 text-center">
           {features.map((item, i) => (
-            <div key={i} className="flex flex-col items-center hover:scale-105 transition-transform duration-300">
+            <div
+              key={i}
+              className="flex flex-col items-center hover:scale-105 transition-transform duration-300"
+            >
               <div className="mb-3">{item.icon}</div>
               <h4 className="font-semibold">{item.title}</h4>
               <p className="text-sm opacity-80">{item.subtitle}</p>
@@ -84,7 +108,14 @@ export default function EcommerceFooter() {
           <div>
             <h3 className="font-bold text-lg mb-6">Products</h3>
             <ul className="space-y-3">
-              {["Prices Drop", "New Products", "Best Sales", "Contact Us", "Sitemap", "Stores"].map((text, i) => (
+              {[
+                "Prices Drop",
+                "New Products",
+                "Best Sales",
+                "Contact Us",
+                "Sitemap",
+                "Stores",
+              ].map((text, i) => (
                 <li key={i}>
                   <a href="#" className="hover:underline transition-colors">
                     {text}
@@ -98,15 +129,20 @@ export default function EcommerceFooter() {
           <div>
             <h3 className="font-bold text-lg mb-6">Our Company</h3>
             <ul className="space-y-3">
-              {["Delivery", "Legal Notice", "Terms & Conditions", "About Us", "Secure Payment", "Login"].map(
-                (text, i) => (
-                  <li key={i}>
-                    <a href="#" className="hover:underline transition-colors">
-                      {text}
-                    </a>
-                  </li>
-                )
-              )}
+              {[
+                "Delivery",
+                "Legal Notice",
+                "Terms & Conditions",
+                "About Us",
+                "Secure Payment",
+                "Login",
+              ].map((text, i) => (
+                <li key={i}>
+                  <a href="#" className="hover:underline transition-colors">
+                    {text}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -114,7 +150,8 @@ export default function EcommerceFooter() {
           <div>
             <h3 className="font-bold text-lg mb-6">Subscribe to Newsletter</h3>
             <p className="text-sm opacity-80 mb-6">
-              Get the latest updates, news, and exclusive offers directly to your inbox.
+              Get the latest updates, news, and exclusive offers directly to
+              your inbox.
             </p>
 
             <form onSubmit={handleSubscribe} className="space-y-4">
@@ -125,6 +162,7 @@ export default function EcommerceFooter() {
                 value={formData.email}
                 onChange={handleChange}
                 className="w-full px-4 py-3 border border-gray-300 rounded-md bg-white/70 focus:ring-2 focus:ring-red-400 focus:shadow-[0_0_10px_rgba(255,75,75,0.5)] transition-all duration-300"
+                required
               />
 
               <button
@@ -145,7 +183,6 @@ export default function EcommerceFooter() {
                 I agree to the terms and privacy policy.
               </label>
             </form>
-
           </div>
         </div>
       </section>
@@ -155,11 +192,17 @@ export default function EcommerceFooter() {
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Social Icons */}
           <div className="flex items-center gap-4">
-            {[FaFacebookF, FaTwitter, FaYoutube, FaPinterestP, FaInstagram].map((Icon, i) => (
-              <a key={i} href="#" className="w-9 h-9 flex items-center justify-center text-gray-700 hover:text-red-500 transition-colors">
-                <Icon />
-              </a>
-            ))}
+            {[FaFacebookF, FaTwitter, FaYoutube, FaPinterestP, FaInstagram].map(
+              (Icon, i) => (
+                <a
+                  key={i}
+                  href="#"
+                  className="w-9 h-9 flex items-center justify-center text-gray-700 hover:text-red-500 transition-colors"
+                >
+                  <Icon />
+                </a>
+              )
+            )}
           </div>
 
           <p className="text-sm opacity-80 text-center">
@@ -167,9 +210,19 @@ export default function EcommerceFooter() {
           </p>
 
           <div className="flex items-center gap-2">
-            <span className="bg-blue-700 text-white px-3 py-1.5 rounded-md font-semibold text-xs">C.O.D</span>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa" className="h-6" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" className="h-6" />
+            <span className="bg-blue-700 text-white px-3 py-1.5 rounded-md font-semibold text-xs">
+              C.O.D
+            </span>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg"
+              alt="Visa"
+              className="h-6"
+            />
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg"
+              alt="PayPal"
+              className="h-6"
+            />
           </div>
         </div>
       </div>

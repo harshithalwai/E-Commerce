@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { Footer, Model, Navbar } from "./components/index.js";
-import {Home, ProductListing,ProductDetails} from "./Pages/index.js";
+import { Home, ProductListing, ProductDetails } from "./Pages/index.js";
+import { ToastContainer, toast } from "react-toastify";
 import Pra from "../Pra.jsx";
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
       </Routes>
       <Footer />
       <Model />
+      <ToastContainer />
     </>
   );
 };
