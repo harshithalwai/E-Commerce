@@ -1,8 +1,10 @@
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
+import ApiError from "../utils/api-error.js";
+import ApiResponse from "../utils/api-response.js";
 dotenv.config();
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: "gmail",
     host: "smtp.gmail.com",
     port: 587,
     secure: false, // true for 465, false for other ports
@@ -25,7 +27,7 @@ const mailBody = (to) => {
             <table align="center" width="600" style="background: #ffffff; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); padding: 40px;">
                 <tr>
                     <td align="center" style="padding-bottom: 20px;">
-                        <img src="https://demos.codezeel.com/prestashop/PRS21/PRS210502/img/logo-1691412328.jpg" alt="Classy Shop" width="80" style="border-radius: 50%;"/>
+                        <img src="cid:classyshoplogo" alt="Classy Shop" width="80" />
                         <h2 style="color: #333; margin-top: 10px;">Classy Shop</h2>
                     </td>
                 </tr>
@@ -58,35 +60,54 @@ const mailBody = (to) => {
             </table>
         </div>
         `,
+        attachments: [
+            {
+                filename: "logo.jpg",
+                path: "./public/logo.jpg",
+                cid: "classyshoplogo",
+            },
+        ],
     };
 };
-
 
 const sendMail = async (transporter, mailOptions) => {
     try {
         await transporter.sendMail(mailOptions);
-        console.log("Email sent successfully");
+    } catch (error) {
+        throw new ApiError(500, "Failed to send email", error);
     }
-    catch (error) {
-        console.error(error);
-    }
-}
-
+};
 
 const subscribeMail = async (req, res) => {
     const { email } = req.body;
+
     try {
-        console.log([email]);
+        if (!email) {
+            throw new ApiError(400, "Email is required");
+        }
+
         const mailOptions = mailBody([email]);
         await sendMail(transporter, mailOptions);
-        console.log("Done");
 
-        res.status(200).json({ success: true, message: "Subscription email sent successfully." });
+        return res
+            .status(200)
+            .json(
+                new ApiResponse(200, null, "Subscription email sent successfully.")
+            );
     } catch (error) {
-        console.error("Mailer Error:", error);
-        res.status(500).json({ success: false, message: error.message });
-    }
+        console.error("MAIL ERROR:", error);
 
-}
+        return res
+            .status(error.statusCode || 500)
+            .json(
+                new ApiError(
+                    error.statusCode || 500,
+                    error.message || "Something went wrong",
+                    error.errors || [],
+                    error.stack || ""
+                )
+            );
+    }
+};
 
 export default subscribeMail;

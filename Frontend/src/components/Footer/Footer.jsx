@@ -179,6 +179,7 @@ export default function EcommerceFooter() {
                   checked={formData.agreed}
                   onChange={handleChange}
                   className="accent-red-500 mt-1"
+                  required
                 />
                 I agree to the terms and privacy policy.
               </label>
