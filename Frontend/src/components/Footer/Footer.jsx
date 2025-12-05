@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   FaTruck,
   FaUndo,
@@ -12,9 +12,11 @@ import {
   FaInstagram,
   FaTwitter,
 } from "react-icons/fa";
-import axios from "axios";
-import { toast } from "react-toastify";
-export default function EcommerceFooter() {
+import StoreContext from "../context/storeContext/store.js";
+
+
+export default function Footer() {
+  const { axios, toast, navigate } = useContext(StoreContext);
   const [formData, setFormData] = useState({
     email: "",
     agreed: false,
@@ -48,6 +50,7 @@ export default function EcommerceFooter() {
       subtitle: "We’re Here Always",
     },
   ];
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -57,10 +60,26 @@ export default function EcommerceFooter() {
     }));
   };
 
-  const handleSubscribe = (e) => {
+  const handleSubscribe = async (e) => {
     e.preventDefault();
-    console.log("Form Submitted:", formData);
-    setFormData({ email: "", agreed: false });
+    setLoading(true);
+
+    try {
+      const response = await axios.post("/api/v1/mail/send-subscribeMail", {
+        email: formData.email,
+      });
+
+      if (response.data.success) {
+        toast.success(response.data.message);
+        setFormData({ email: "", agreed: false });
+      } else {
+        toast.error(response.data.message || "Something went wrong");
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Subscription failed!");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -161,15 +180,28 @@ export default function EcommerceFooter() {
                 placeholder="Your Email Address"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-md bg-white/70 focus:ring-2 focus:ring-red-400 focus:shadow-[0_0_10px_rgba(255,75,75,0.5)] transition-all duration-300"
+                className="w-full px-4 py-3 border outline-none rounded-md bg-white/70 focus:ring-2 focus:ring-red-400 focus:shadow-[0_0_10px_rgba(255,75,75,0.5)] transition-all duration-300"
                 required
               />
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-red-500 via-pink-500 to-orange-400 text-white font-semibold py-3 rounded-md transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,100,100,0.7)]"
+                disabled={loading}
+                className={`w-full flex items-center justify-center gap-2 
+                  bg-gradient-to-r from-red-500 via-pink-500 to-orange-400 
+                  text-white font-semibold py-3 rounded-md transition-all duration-300
+                  ${
+                    loading
+                      ? "opacity-60 cursor-not-allowed"
+                      : "hover:shadow-[0_0_20px_rgba(255,100,100,0.7)]"
+                  }
+                `}
               >
-                SUBSCRIBE
+                {loading ? (
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                ) : (
+                  "SUBSCRIBE"
+                )}
               </button>
 
               <label className="flex items-start gap-2 text-sm cursor-pointer">

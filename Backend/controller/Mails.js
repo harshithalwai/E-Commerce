@@ -85,6 +85,11 @@ const subscribeMail = async (req, res) => {
         if (!email) {
             throw new ApiError(400, "Email is required");
         }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailRegex.test(email)) {
+            throw new ApiError(400, "Invalid email format");
+        }
 
         const mailOptions = mailBody([email]);
         await sendMail(transporter, mailOptions);

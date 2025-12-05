@@ -1,7 +1,12 @@
-import { useState } from "react";
 import StoreContext from "./store.js";
+import axios from "axios";
+
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const StoreContextProvider = ({ children }) => {
+  const navigate = useNavigate();
   const [openProductDeatilsModel, setOpenProductDeatilsModel] = useState(false);
 
   const handleCloseProductDeatilsModel = () =>
@@ -9,6 +14,9 @@ const StoreContextProvider = ({ children }) => {
       return !prev;
     });
   const storeContextValue = {
+    axios,
+    toast,
+    navigate,
     openProductDeatilsModel,
     setOpenProductDeatilsModel,
     handleCloseProductDeatilsModel,
