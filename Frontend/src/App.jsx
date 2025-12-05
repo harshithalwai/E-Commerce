@@ -11,7 +11,7 @@ const App = () => {
 
   return (
     <>
-      {/* {!hideLayout && <Navbar />} */}
+      {!hideLayout && <Navbar />}
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -21,7 +21,7 @@ const App = () => {
         <Route path="/product/:id" element={<ProductDetails />} />
       </Routes>
 
-      {/* {!hideLayout && <Footer />} */}
+      {!hideLayout && <Footer />}
 
       <Model />
       <ToastContainer />
