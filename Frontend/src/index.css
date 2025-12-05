@@ -76,3 +76,7 @@ body {
 .thumbnail-swiper .swiper-button-next:hover {
   color: #ff7b7b !important;
 }
+::selection {
+  background-color: #ff3b3b; /* your color */
+  color: white; /* text color while selected */
+}

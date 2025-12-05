@@ -1,19 +1,28 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { Footer, Model, Navbar } from "./components/index.js";
-import { Home, ProductListing, ProductDetails } from "./Pages/index.js";
-import { ToastContainer, toast } from "react-toastify";
-import Pra from "../Pra.jsx";
+import { Home, ProductListing, ProductDetails, LoginSignup } from "./Pages/index.js";
+import { ToastContainer } from "react-toastify";
+import Pra from "../Pra.jsx"
 const App = () => {
+  const location = useLocation();
+
+  // Hide navbar & footer when on /auth
+  const hideLayout = location.pathname === "/auth";
+
   return (
     <>
-      <Navbar />
+      {/* {!hideLayout && <Navbar />} */}
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/productlisting" element={<ProductListing />} />
-        <Route path="/pra" element={<Pra />} />
+        <Route path="/auth" element={<LoginSignup />} />
+        <Route path="/pras" element={<Pra/>} />
         <Route path="/product/:id" element={<ProductDetails />} />
       </Routes>
-      <Footer />
+
+      {/* {!hideLayout && <Footer />} */}
+
       <Model />
       <ToastContainer />
     </>

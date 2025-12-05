@@ -156,7 +156,7 @@ const ListProductBox = ({ product = {} }) => {
       {/* Options Button */}
       <div className="absolute bottom-4 right-4">
         <button className="px-6 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors font-medium shadow-sm">
-          OPTIONS
+         Add to Cart
         </button>
       </div>
     </div>

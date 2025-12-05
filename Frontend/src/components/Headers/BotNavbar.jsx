@@ -14,13 +14,40 @@ const BotNavbar = () => {
     "Home",
     "Fashion",
     "Electronics",
-    "Bags",
+    "Categories",
     "Footwear",
     "Groceries",
     "Beauty",
     "Wellness",
     "Jewellery",
   ]);
+
+  const categoriesData = [
+    {
+      title: "Electronics",
+      subcategories: ["Laptop", "Mobile", "Tablet", "Watch"]
+    },
+    {
+      title: "Fashion",
+      subcategories: ["Purse", "Shoes", "T-Shirt", "Tote Bag"]
+    },
+    {
+      title: "Furniture",
+      subcategories: ["Bottle Grinder", "Pillow", "Poufs", "Sofas"]
+    },
+    {
+      title: "Jewellery",
+      subcategories: ["Diamond Cluster", "Drop Earrings", "Earrings", "Necklace"]
+    },
+    {
+      title: "Retro Fashion",
+      subcategories: ["Bucket Hat", "Denim Skirt", "Shimmer", "Tie-Dye"]
+    },
+    {
+      title: "Watches",
+      subcategories: ["Aviator Watches", "Goggles", "Hybrid Watches", "Smart Watches"]
+    }
+  ];
 
   const openCategoryPanel = () => setIsOpenCatPanel((prev) => !prev);
 
@@ -68,7 +95,35 @@ const BotNavbar = () => {
                       {item}
                     </ButtonBase>
 
-                    {/* Submenu with bridge */}
+                    {/* Mega Menu for Categories */}
+                    {item === "Categories" && (
+                      <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-20">
+                        <div className="bg-white shadow-xl rounded-md text-black p-6 grid grid-cols-3 gap-8 min-w-[700px]">
+                          {categoriesData.map((category, index) => (
+                            <div key={index}>
+                              <h3 className="font-bold text-base mb-3 text-gray-900">
+                                {category.title}
+                              </h3>
+                              <ul className="space-y-2">
+                                {category.subcategories.map((subcat, subIndex) => (
+                                  <li key={subIndex}>
+                                    <Button
+                                      component={Link}
+                                      to={`/${category.title.toLowerCase()}/${subcat.toLowerCase().replace(/\s+/g, '-')}`}
+                                      className="!w-full !justify-start !capitalize hover:!text-[#ff5252] hover:!bg-gray-50 !rounded-md !text-left !font-normal !text-gray-600 !px-2 !py-1.5 !text-sm"
+                                    >
+                                      {subcat}
+                                    </Button>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Fashion Submenu */}
                     {item === "Fashion" && (
                       <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-20">
                         <ul className="bg-white shadow-lg rounded-md text-black min-w-[140px] flex flex-col p-1">

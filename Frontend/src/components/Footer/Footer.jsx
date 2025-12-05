@@ -72,6 +72,7 @@ export default function Footer() {
       if (response.data.success) {
         toast.success(response.data.message);
         setFormData({ email: "", agreed: false });
+        navigate("/");
       } else {
         toast.error(response.data.message || "Something went wrong");
       }

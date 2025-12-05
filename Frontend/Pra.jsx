@@ -1,60 +1,135 @@
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import PersonIcon from "@mui/icons-material/Person";
+import EmailIcon from "@mui/icons-material/Email";
+import LockIcon from "@mui/icons-material/Lock";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+
+const formVariants = {
+  enter: { opacity: 0, y: 20 },
+  center: { opacity: 1, y: 0, transition: { duration: 0.3 } },
+  exit: { opacity: 0, y: -20, transition: { duration: 0.3 } },
+};
 
 const Pra = () => {
-  const [activeTab, setActiveTab] = useState("description");
-  const [showReviewForm, setShowReviewForm] = useState(false);
-  const [reviewData, setReviewData] = useState({
+  const [isLogin, setIsLogin] = useState(true);
+  const [formData, setFormData] = useState({
     name: "",
-    title: "",
-    rating: 5,
-    review: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  //     return (
-  //       <div className="flex gap-1">
-  //         {[...Array(total)].map((_, i) => (
-  //           <svg
-  //             key={i}
-  //             className={`w-4 h-4 ${
-  //               i < rating ? "text-yellow-400 fill-current" : "text-gray-300"
-  //             }`}
-  //             viewBox="0 0 20 20"
-  //           >
-  //             <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-  //           </svg>
-  //         ))}
-  //       </div>
-  //     );
-  //   };
+  const switchMode = () => setIsLogin(!isLogin);
+
+  const handleChange = (field) => (e) => {
+    setFormData({ ...formData, [field]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(isLogin ? "Login" : "Signup", formData);
+  };
 
   return (
-    <div>
-      <div>
-        <label className="block font-semibold text-gray-700 mb-2">Rating</label>
-        <div className="flex gap-2">
-          {[1, 2, 3, 4, 5].map((star) => (
-            <button
-              key={star}
-              onClick={() => {
-                setReviewData({ ...reviewData, rating: star });
-              }}
-              className="focus:outline-none"
-            >
-              <svg
-                className={`w-8 h-8 ${
-                  star <= reviewData.rating
-                    ? "text-yellow-400 fill-current"
-                    : "text-gray-300"
-                }`}
-                viewBox="0 0 20 20"
-              >
-                <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-              </svg>
-            </button>
-          ))}
+   <>
+    <AnimatePresence mode="wait">
+      <motion.form
+        key={isLogin ? "login" : "signup"}
+        variants={formVariants}
+        initial="enter"
+        animate="center"
+        exit="exit"
+        onSubmit={handleSubmit}
+        className="space-y-3"
+      >
+        {/* Name - Signup only */}
+        {!isLogin && (
+          <motion.div className="relative">
+            <PersonIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" />
+            <input
+              type="text"
+              placeholder="Full Name"
+              value={formData.name}
+              onChange={handleChange("name")}
+              required
+              className="w-full px-10 py-2.5 rounded-lg border"
+            />
+          </motion.div>
+        )}
+
+        {/* Email */}
+        <div className="relative">
+          <EmailIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" />
+          <input
+            type="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange("email")}
+            required
+            className="w-full px-10 py-2.5 rounded-lg border"
+          />
         </div>
-      </div>
-    </div>
+
+        {/* Password */}
+        <div className="relative">
+          <LockIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" />
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange("password")}
+            required
+            className="w-full px-10 py-2.5 rounded-lg border"
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-1/2 -translate-y-1/2"
+          >
+            {showPassword ? <VisibilityOff /> : <Visibility />}
+          </button>
+        </div>
+
+        {/* Confirm Password - Signup only */}
+        {!isLogin && (
+          <motion.div className="relative">
+            <LockIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" />
+            <input
+              type={showConfirmPassword ? "text" : "password"}
+              placeholder="Confirm Password"
+              value={formData.confirmPassword}
+              onChange={handleChange("confirmPassword")}
+              required
+              className="w-full px-10 py-2.5 rounded-lg border"
+            />
+            <button
+              type="button"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2"
+            >
+              {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+            </button>
+          </motion.div>
+        )}
+
+        <button type="submit" className="w-full py-2.5 rounded-lg bg-red-500 text-white">
+          {isLogin ? "Login" : "Sign Up"}
+        </button>
+
+        <button
+          type="button"
+          onClick={switchMode}
+          className="mt-2 text-sm underline"
+        >
+          {isLogin ? "Switch to Sign Up" : "Switch to Login"}
+        </button>
+      </motion.form>
+    </AnimatePresence>
+   </>
   );
 };
 

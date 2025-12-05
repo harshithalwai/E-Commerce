@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState ,useContext} from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { MdCompare, MdFullscreen } from "react-icons/md";
 import { FiShoppingCart } from "react-icons/fi";
-
+import StoreContext from "../context/storeContext/store";
 const ProductCard = ({
   image,
   hoverImage,
@@ -14,6 +14,7 @@ const ProductCard = ({
   badge,
   colors = [],
 }) => {
+  const {setOpenProductDeatilsModel} = useContext(StoreContext);
   const [isHovered, setIsHovered] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [selectedColor, setSelectedColor] = useState(0);
@@ -107,6 +108,7 @@ const ProductCard = ({
           <button
             className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-blue-500 hover:text-white transition-all duration-200"
             aria-label="Fullscreen View"
+            onClick={() => setOpenProductDeatilsModel((prev)=>!prev)}
           >
             <MdFullscreen size={20} />
           </button>

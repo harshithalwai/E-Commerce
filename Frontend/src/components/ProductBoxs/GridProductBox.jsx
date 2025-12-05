@@ -7,6 +7,10 @@ const GridProductBox = ({ product, index }) => {
   // Example colors
   const colors = product?.colors || ["#6B7280", "#84CC16", "#EAB308"];
 
+  const handleAddToCart = () => {
+    console.log("Added to Cart:", product?.title);
+  };
+
   const renderStars = (rating) => (
     <div className="flex gap-0.5">
       {[1, 2, 3, 4, 5].map((star) => (
@@ -26,7 +30,8 @@ const GridProductBox = ({ product, index }) => {
   return (
     <div
       key={index}
-      className="cursor-pointer p-2 relative w-full border-2 border-gray-300 bg-white overflow-hidden rounded-md group"
+      className="cursor-pointer p-2 relative w-full border-2 border-gray-200 bg-white overflow-hidden rounded-md group 
+      transition-transform duration-300 hover:shadow-lg"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -46,41 +51,39 @@ const GridProductBox = ({ product, index }) => {
 
       {/* Image */}
       <div
-        className="relative bg-gray-50 overflow-hidden"
+        className="relative bg-gray-50 overflow-hidden rounded-md"
         style={{ paddingBottom: "100%" }}
       >
         <img
           src={product?.image || "./Headset1.jpg"}
           alt={product?.title || "Product"}
-          className={`absolute inset-0 object-fit w-full transition-all duration-700 ease-in-out ${
+          className={`absolute inset-0 object-cover w-full h-full transition-all duration-700 ease-in-out ${
             isHovered ? "opacity-0 scale-105" : "opacity-100 scale-100"
           }`}
         />
         <img
           src={product?.hoverImage || "./Headset1-hover.jpg"}
           alt={product?.title || "Hover Product"}
-          className={`absolute inset-0 object-cover w-full transition-all duration-700 ease-in-out ${
+          className={`absolute inset-0 object-cover w-full h-full transition-all duration-700 ease-in-out ${
             isHovered ? "opacity-100 scale-105" : "opacity-0 scale-100"
           }`}
         />
 
         {/* Hover Buttons */}
         <div
-          className={`absolute right-2 top-1/2 -translate-y-1/2 flex flex-col gap-2 transition-all duration-300 ${
-            isHovered ? "opacity-100 translate-x-0" : "opacity-0 translate-x-2"
-          }`}
+          className={`absolute right-2 top-1/2 -translate-y-1/2 flex flex-col gap-2 transition-all duration-300 z-20
+          ${isHovered ? "opacity-100 translate-x-0" : "opacity-0 translate-x-2"}`}
         >
-          {["wishlist", "compare", "view", "cart"].map((btn, idx) => (
+          {["wishlist", "compare", "view"].map((btn, idx) => (
             <button
               key={idx}
-              className={`w-8 h-8 bg-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 border border-gray-300 ${
+              className={`w-8 h-8 bg-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 border border-gray-300
+              ${
                 btn === "wishlist"
                   ? "hover:bg-red-500 hover:text-white hover:border-red-500"
                   : btn === "compare"
                   ? "hover:bg-blue-500 hover:text-white hover:border-blue-500"
-                  : btn === "view"
-                  ? "hover:bg-purple-500 hover:text-white hover:border-purple-500"
-                  : "hover:bg-green-500 hover:text-white hover:border-green-500"
+                  : "hover:bg-purple-500 hover:text-white hover:border-purple-500"
               }`}
             >
               <svg
@@ -121,17 +124,29 @@ const GridProductBox = ({ product, index }) => {
                     />
                   </>
                 )}
-                {btn === "cart" && (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                  />
-                )}
               </svg>
             </button>
           ))}
+
+          {/* ADD TO CART BUTTON */}
+          <button
+            onClick={handleAddToCart}
+            className="w-8 h-8 bg-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 border border-gray-300 hover:bg-green-500 hover:text-white hover:border-green-500"
+          >
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+              />
+            </svg>
+          </button>
         </div>
 
         {/* Color Options */}
@@ -160,15 +175,20 @@ const GridProductBox = ({ product, index }) => {
         <p className="text-[10px] text-gray-500 mb-0.5 uppercase tracking-wide">
           {product?.brand || "Gadget Zone"}
         </p>
+
         <h3 className="text-sm font-semibold text-gray-900 mb-1 hover:text-red-500 transition-colors duration-300">
           {product?.title || "Apple AirPods Max Over-Ear Wireless Headphone"}
         </h3>
+
         {renderStars(product?.rating || 5)}
+
         <div className="flex items-center justify-between gap-1 mt-1">
           <span className="text-[11px] text-gray-400 line-through">$47.00</span>
+
           <span className="text-md font-bold text-red-500">
             ${product?.price || 42.0}
           </span>
+
           {product?.originalPrice && (
             <span className="text-[11px] text-gray-400 line-through">
               ${product.originalPrice}
