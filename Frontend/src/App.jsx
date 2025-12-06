@@ -19,6 +19,7 @@ const App = () => {
         <Route path="/auth" element={<LoginSignup />} />
         <Route path="/pras" element={<Pra/>} />
         <Route path="/product/:id" element={<ProductDetails />} />
+        
       </Routes>
 
       {!hideLayout && <Footer />}
