@@ -1,13 +1,20 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import { Footer, Model, Navbar } from "./components/index.js";
-import { Home, ProductListing, ProductDetails, LoginSignup } from "./Pages/index.js";
+import { Footer, Model, Navbar, SwipableCartPanel } from "./components/index.js";
+import {
+  Home,
+  ProductListing,
+  ProductDetails,
+  LoginSignup,
+} from "./Pages/index.js";
 import { ToastContainer } from "react-toastify";
-import Pra from "../Pra.jsx"
+import Pra from "../Pra.jsx";
 const App = () => {
   const location = useLocation();
 
   // Hide navbar & footer when on /auth
-  const hideLayout = location.pathname === "/auth";
+  const hideLayout =
+    location.pathname === "/auth/register" ||
+    location.pathname === "/auth/login";
 
   return (
     <>
@@ -16,15 +23,19 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/productlisting" element={<ProductListing />} />
-        <Route path="/auth" element={<LoginSignup />} />
-        <Route path="/pras" element={<Pra/>} />
+        <Route path="/auth/login" element={<LoginSignup loginFlag={true} />} />
+        <Route
+          path="/auth/register"
+          element={<LoginSignup loginFlag={false} />}
+        />
+        <Route path="/pras" element={<Pra />} />
         <Route path="/product/:id" element={<ProductDetails />} />
-        
       </Routes>
 
       {!hideLayout && <Footer />}
 
       <Model />
+      <SwipableCartPanel/>
       <ToastContainer />
     </>
   );

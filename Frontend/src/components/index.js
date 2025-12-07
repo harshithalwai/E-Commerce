@@ -20,6 +20,7 @@ import GridProductBox from "./ProductBoxs/GridProductBox.jsx";
 import ListProductBox from "./ProductBoxs/ListProductBox.jsx";
 import ProductDetailsCont from "./ProductDetailsCont/ProductDetailsCont.jsx";
 import Model from "./Model/Model.jsx";
+import SwipableCartPanel from "./SwipableCartPanel/SwipableCartPanel.jsx";
 export {
     Navbar,
     TopNavbar,
@@ -43,6 +44,7 @@ export {
     Footer,
     Loader,
     Model,
+    SwipableCartPanel,
 };
 
 import StoreContextProvider from "./context/storeContext/storeProvider.jsx";

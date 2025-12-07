@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-// MUI ICONS
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import EmailIcon from "@mui/icons-material/Email";
@@ -13,8 +11,8 @@ import GoogleIcon from "@mui/icons-material/Google";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import MicrosoftIcon from "@mui/icons-material/Microsoft";
 
-export default function AnimatedAuthForm() {
-  const [isLogin, setIsLogin] = useState(true);
+export default function AnimatedAuthForm({ loginFlag }) {
+  const [isLogin, setIsLogin] = useState(loginFlag);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({

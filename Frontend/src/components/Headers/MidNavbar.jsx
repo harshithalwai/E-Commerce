@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
+import StoreContext from "../context/storeContext/store";
 
 // Enhanced SearchBar component with better UX
 const SearchBar = () => {
@@ -52,7 +53,7 @@ const SearchBar = () => {
   );
 };
 
-// Enhanced Badge Component with animations
+// Enhanced Badge
 const Badge = ({ children, count, className = "" }) => {
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -80,7 +81,7 @@ const Badge = ({ children, count, className = "" }) => {
   );
 };
 
-// Enhanced Icon Button with better interactions
+// Enhanced IconButton
 const IconButton = ({
   children,
   onClick,
@@ -114,20 +115,15 @@ const IconButton = ({
       <div className="transition-transform duration-200 group-hover:scale-110">
         {children}
       </div>
-      {/* Ripple effect */}
+
       <div className="absolute inset-0 rounded-full bg-red-500 opacity-0 scale-0 group-active:opacity-20 group-active:scale-100 transition-all duration-200"></div>
     </button>
   );
 };
 
-// Enhanced SVG Icons with better styling
+// Icons
 const HeartIcon = ({ className = "w-6 h-6" }) => (
-  <svg
-    className={className}
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-  >
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -138,12 +134,7 @@ const HeartIcon = ({ className = "w-6 h-6" }) => (
 );
 
 const BellIcon = ({ className = "w-6 h-6" }) => (
-  <svg
-    className={className}
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-  >
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -154,12 +145,7 @@ const BellIcon = ({ className = "w-6 h-6" }) => (
 );
 
 const ShoppingCartIcon = ({ className = "w-6 h-6" }) => (
-  <svg
-    className={className}
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-  >
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -170,12 +156,7 @@ const ShoppingCartIcon = ({ className = "w-6 h-6" }) => (
 );
 
 const MoreIcon = ({ className = "w-5 h-5" }) => (
-  <svg
-    className={className}
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-  >
+  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -185,7 +166,7 @@ const MoreIcon = ({ className = "w-5 h-5" }) => (
   </svg>
 );
 
-// Enhanced Link component
+// Link Component
 const Link = ({ to, children, className = "", variant = "default" }) => {
   const baseClasses =
     "transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 rounded-lg";
@@ -208,12 +189,12 @@ const Link = ({ to, children, className = "", variant = "default" }) => {
   );
 };
 
-// Notification dropdown component
+// Notification Dropdown
 const NotificationDropdown = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="absolute right-0 top-full mt-2 w-80 bg-white rounded-xl shadow-2xl border border-gray-100 z-10 transform transition-all duration-300 origin-top">
+    <div className="absolute right-0 top-full mt-2 w-80 bg-white rounded-xl shadow-2xl border border-gray-100 z-10">
       <div className="p-4 border-b border-gray-100">
         <h3 className="font-semibold text-gray-800">Notifications</h3>
       </div>
@@ -221,10 +202,10 @@ const NotificationDropdown = ({ isOpen, onClose }) => {
         {[1, 2, 3].map((item) => (
           <div
             key={item}
-            className="p-4 hover:bg-gray-50 transition-colors duration-150 border-b border-gray-50 last:border-b-0"
+            className="p-4 hover:bg-gray-50 border-b border-gray-50 last:border-b-0"
           >
             <div className="flex items-start gap-3">
-              <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
+              <div className="w-2 h-2 bg-red-500 rounded-full mt-2"></div>
               <div>
                 <p className="text-sm font-medium text-gray-800">
                   Your order has been shipped!
@@ -236,7 +217,7 @@ const NotificationDropdown = ({ isOpen, onClose }) => {
         ))}
       </div>
       <div className="p-3 border-t border-gray-100">
-        <button className="w-full text-center text-red-500 font-medium text-sm hover:text-red-600 transition-colors duration-200">
+        <button className="w-full text-center text-red-500 font-medium text-sm hover:text-red-600">
           View All Notifications
         </button>
       </div>
@@ -244,7 +225,7 @@ const NotificationDropdown = ({ isOpen, onClose }) => {
   );
 };
 
-// Mobile Actions Popup with Login/Signup
+// MOBILE POPUP (FIXED)
 const MobileActionsPopup = ({
   isOpen,
   onClose,
@@ -253,24 +234,24 @@ const MobileActionsPopup = ({
   cartCount,
   onWishlistClick,
   onNotificationClick,
-  onCartClick,
+  onCartClick, // FIXED
 }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="absolute right-0 top-full mt-2 w-56 bg-white rounded-xl shadow-2xl border border-gray-100 z-10 transform transition-all duration-300 origin-top">
+    <div className="absolute right-0 top-full mt-2 w-56 bg-white rounded-xl shadow-2xl border border-gray-100 z-10">
       <div className="p-2">
         {/* Wishlist */}
         <button
           onClick={onWishlistClick}
-          className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors duration-150"
+          className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg"
         >
           <div className="flex items-center gap-3">
             <HeartIcon className="w-5 h-5 text-gray-600" />
             <span className="text-sm font-medium text-gray-800">Wishlist</span>
           </div>
           {wishlistCount > 0 && (
-            <span className="bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
+            <span className="bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
               {wishlistCount > 99 ? "99+" : wishlistCount}
             </span>
           )}
@@ -279,7 +260,7 @@ const MobileActionsPopup = ({
         {/* Notifications */}
         <button
           onClick={onNotificationClick}
-          className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors duration-150"
+          className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg"
         >
           <div className="flex items-center gap-3">
             <BellIcon className="w-5 h-5 text-gray-600" />
@@ -288,39 +269,42 @@ const MobileActionsPopup = ({
             </span>
           </div>
           {notificationCount > 0 && (
-            <span className="bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
+            <span className="bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
               {notificationCount > 99 ? "99+" : notificationCount}
             </span>
           )}
         </button>
 
-        {/* Cart */}
+        {/* CART FIXED — NO DIRECT setOpenCartPanel HERE */}
         <button
-          onClick={onCartClick}
-          className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors duration-150"
+          onClick={onCartClick} // FIXED: USING PROP FROM MIDNAVBAR
+          className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg"
         >
           <div className="flex items-center gap-3">
             <ShoppingCartIcon className="w-5 h-5 text-gray-600" />
             <span className="text-sm font-medium text-gray-800">Cart</span>
           </div>
+
           {cartCount > 0 && (
-            <span className="bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
+            <span className="bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
               {cartCount > 99 ? "99+" : cartCount}
             </span>
           )}
         </button>
-        {/* Login/Signup Section */}
+
+        {/* Login/Signup */}
         <div className="p-1 border-t border-gray-100">
           <div className="flex flex-col gap-1">
             <Link
               to="/login"
-              className="w-full text-center px-4 py-2 text-sm font-medium text-gray-700 hover:bg-red-50 hover:text-red-600 border border-transparent hover:border-red-200 rounded-lg transition-all duration-200"
+              className="w-full text-center px-4 py-2 text-sm font-medium text-gray-700 hover:bg-red-50 hover:text-red-600 border border-transparent hover:border-red-200 rounded-lg"
             >
               Login
             </Link>
+
             <Link
               to="/register"
-              className="w-full text-center px-4 py-2 bg-red-500 text-white font-medium hover:bg-red-600 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-sm rounded-lg transition-all duration-200"
+              className="w-full text-center px-4 py-2 bg-red-500 text-white font-medium hover:bg-red-600 shadow-md hover:shadow-lg text-sm rounded-lg"
             >
               Sign Up
             </Link>
@@ -331,62 +315,54 @@ const MobileActionsPopup = ({
   );
 };
 
+// MID NAVBAR
 const MidNavbar = () => {
+  const { openCartPanel, setOpenCartPanel } = useContext(StoreContext);
+
   const [wishlistCount, setWishlistCount] = useState(2);
   const [notificationCount, setNotificationCount] = useState(5);
   const [cartCount, setCartCount] = useState(4);
+
   const [showNotifications, setShowNotifications] = useState(false);
   const [showMobileActions, setShowMobileActions] = useState(false);
+
   const notificationRef = useRef(null);
   const mobileActionsRef = useRef(null);
 
-  // Close notifications when clicking outside
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        notificationRef.current &&
-        !notificationRef.current.contains(event.target)
-      ) {
+    const handleOutside = (e) => {
+      if (notificationRef.current && !notificationRef.current.contains(e.target))
         setShowNotifications(false);
-      }
-      if (
-        mobileActionsRef.current &&
-        !mobileActionsRef.current.contains(event.target)
-      ) {
+
+      if (mobileActionsRef.current && !mobileActionsRef.current.contains(e.target))
         setShowMobileActions(false);
-      }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+
+    document.addEventListener("mousedown", handleOutside);
+    return () => document.removeEventListener("mousedown", handleOutside);
   }, []);
 
   return (
-    <div
-      className={
-        "sticky top-0 left-0 right-0 bg-white mid-strip  z-10 border-b border-gray-100 transition-all duration-200 py-1 xl:py-2"
-      }
-    >
-      <div className="container  mx-auto ">
-        {/* Unified Responsive Layout */}
+    <div className="sticky top-0 left-0 right-0 bg-white mid-strip z-10 border-b border-gray-100 py-1 xl:py-2">
+      <div className="container mx-auto">
         <div className="flex justify-between items-center gap-2 xl:gap-8">
-          {/* Logo Section - Responsive */}
+          {/* LOGO */}
           <div className="flex-shrink-0">
             <Link
               to="/"
-              className="inline-block transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 rounded-lg xl:p-1"
+              className="inline-block transition-all duration-300 hover:scale-105 xl:p-1"
             >
               <img
                 src="/Nav-logo.jpg"
                 alt="ClassyShop - Big Mega Store"
-                className="h-6 xl:h-12 w-auto object-contain hover:brightness-110 transition-all duration-200"
+                className="h-6 xl:h-12 w-auto object-contain hover:brightness-110"
                 onError={(e) => {
-                  // Fallback if image doesn't load
                   e.target.style.display = "none";
                   e.target.nextSibling.style.display = "flex";
                 }}
               />
-              {/* Fallback logo - Responsive */}
-              <div className="h-6 w-20 xl:h-12 xl:w-48 bg-gradient-to-r from-red-500 to-red-600 rounded-md xl:rounded-lg hidden items-center justify-center shadow-md hover:shadow-lg transition-shadow duration-200">
+
+              <div className="h-6 w-20 xl:h-12 xl:w-48 bg-gradient-to-r from-red-500 to-red-600 rounded-md hidden items-center justify-center">
                 <span className="text-white font-bold text-xs xl:text-lg">
                   CLASSYSHOP
                 </span>
@@ -394,96 +370,89 @@ const MidNavbar = () => {
             </Link>
           </div>
 
-          {/* Search Section - Responsive */}
-          <div className=" w-full flex-1  mx-1 xl:mx-0">
+          {/* SEARCH */}
+          <div className="w-full flex-1 mx-1 xl:mx-0">
             <SearchBar />
           </div>
 
-          {/* Unified Actions Section - Responsive */}
+          {/* ACTIONS */}
           <div className="flex items-center gap-1 xl:gap-6 flex-shrink-0">
-            {/* Desktop Auth Links - Hidden on Mobile */}
+            {/* DESKTOP AUTH */}
             <div className="hidden xl:flex items-center gap-2">
-              <Link
-                to="/login"
-                variant="button"
-                className="text-gray-700 hover:text-red-600"
-              >
+              <Link to="/auth/login" variant="button">
                 Login
               </Link>
-              <span className="text-gray-300 select-none mx-1">|</span>
-              <Link to="/register" variant="primary" className="shadow-red-200">
+              <span className="text-gray-300 mx-1">|</span>
+              <Link to="/auth/register" variant="primary">
                 Sign Up
               </Link>
             </div>
 
-            {/* Desktop Action Icons - Hidden on Mobile */}
+            {/* DESKTOP ICONS */}
             <div className="hidden xl:flex items-center gap-2 bg-gray-50 rounded-full p-2">
               {/* Wishlist */}
               <Badge count={wishlistCount}>
                 <IconButton
-                  ariaLabel="View wishlist"
-                  onClick={() => {
-                    console.log("Wishlist clicked");
-                    setWishlistCount((prev) => (prev > 0 ? prev - 1 : 3));
-                  }}
-                  className="hover:bg-white"
+                  ariaLabel="Wishlist"
+                  onClick={() =>
+                    setWishlistCount((prev) => (prev > 0 ? prev - 1 : 3))
+                  }
                 >
-                  <HeartIcon className="w-6 h-6" />
+                  <HeartIcon />
                 </IconButton>
               </Badge>
 
-              {/* Notifications with dropdown */}
+              {/* Notifications */}
               <div className="relative" ref={notificationRef}>
                 <Badge count={notificationCount}>
                   <IconButton
-                    ariaLabel="View notifications"
+                    ariaLabel="Notifications"
                     onClick={() => {
                       setShowNotifications(!showNotifications);
-                      if (notificationCount > 0) setNotificationCount(0);
+                      setNotificationCount(0);
                     }}
                     isActive={showNotifications}
-                    className="hover:bg-white"
                   >
-                    <BellIcon className="w-6 h-6" />
+                    <BellIcon />
                   </IconButton>
                 </Badge>
+
                 <NotificationDropdown
                   isOpen={showNotifications}
                   onClose={() => setShowNotifications(false)}
                 />
               </div>
 
-              {/* Shopping Cart */}
+              {/* Cart */}
               <Badge count={cartCount}>
                 <IconButton
-                  ariaLabel="View shopping cart"
-                  onClick={() => {
-                    console.log("Cart clicked");
-                    setCartCount((prev) => (prev > 0 ? prev - 1 : 5));
-                  }}
-                  className="hover:bg-white ring-2 ring-red-100"
+                  ariaLabel="Cart"
+                  onClick={() => setOpenCartPanel((prev) => !prev)}
+                  className="ring-2 ring-red-100"
                 >
-                  <ShoppingCartIcon className="w-6 h-6" />
+                  <ShoppingCartIcon />
                 </IconButton>
               </Badge>
             </div>
 
-            {/* Mobile Actions Trigger - Visible on Mobile Only */}
+            {/* MOBILE MORE MENU */}
             <div className="xl:hidden relative" ref={mobileActionsRef}>
               <IconButton
-                ariaLabel="More actions"
+                ariaLabel="More"
                 onClick={() => setShowMobileActions(!showMobileActions)}
                 isActive={showMobileActions}
                 size="small"
-                className="bg-gray-50 hover:bg-gray-100 ml-1"
+                className="bg-gray-50 ml-1"
               >
-                <MoreIcon className="w-4 h-4" />
-                {/* Combined count indicator */}
+                <MoreIcon />
+
                 {wishlistCount + notificationCount + cartCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center font-bold border border-white">
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center border border-white">
                     {wishlistCount + notificationCount + cartCount > 99
                       ? "99+"
-                      : wishlistCount + notificationCount + cartCount}
+                      : wishlistCount +
+                        notificationCount +
+                        cartCount}
                   </span>
                 )}
               </IconButton>
@@ -500,9 +469,7 @@ const MidNavbar = () => {
                 onNotificationClick={() =>
                   setNotificationCount((prev) => (prev > 0 ? prev - 1 : 5))
                 }
-                onCartClick={() =>
-                  setCartCount((prev) => (prev > 0 ? prev - 1 : 4))
-                }
+                onCartClick={() => setOpenCartPanel((p) => !p)} // FIXED HERE
               />
             </div>
           </div>

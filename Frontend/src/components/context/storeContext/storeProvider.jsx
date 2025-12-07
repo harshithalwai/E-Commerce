@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 
 const StoreContextProvider = ({ children }) => {
   const navigate = useNavigate();
+    const [openCartPanel, setOpenCartPanel] = useState(false);
   const [openProductDeatilsModel, setOpenProductDeatilsModel] = useState(false);
 
   const handleCloseProductDeatilsModel = () =>
@@ -17,6 +18,8 @@ const StoreContextProvider = ({ children }) => {
     axios,
     toast,
     navigate,
+    openCartPanel,
+    setOpenCartPanel,
     openProductDeatilsModel,
     setOpenProductDeatilsModel,
     handleCloseProductDeatilsModel,

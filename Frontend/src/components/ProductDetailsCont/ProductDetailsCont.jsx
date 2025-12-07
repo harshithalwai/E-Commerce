@@ -257,7 +257,6 @@ const ProductDetailsCont = ({ inModal = false }) => {
           </button>
         </div>
 
-        {!inModal && (
           <div className="flex flex-wrap gap-3">
             <button className="flex-1 border-2 border-gray-300 hover:border-red-500 hover:text-red-500 py-3 rounded-lg transition text-center font-medium">
               Wishlist
@@ -266,7 +265,6 @@ const ProductDetailsCont = ({ inModal = false }) => {
               Compare
             </button>
           </div>
-        )}
       </div>
     </div>
   );
