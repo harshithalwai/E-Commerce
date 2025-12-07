@@ -106,8 +106,8 @@ const ProductListing = () => {
         <Breadcrumb />
       </div>
 
-      <div className="bg-white">
-        <div className="">
+      <div className="bg-white ">
+        <div className="container">
           <div className="min-h-screen p-6 flex gap-6">
             {/* Sidebar Filters */}
             <div className="w-1/4 max-h-screen overflow-y-auto bg-white rounded-lg p-6 shadow-sm scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-gray-100 flex flex-col">
@@ -193,7 +193,7 @@ const ProductListing = () => {
                   'lorem ipsum' will uncover many web sites still in their.
                 </p>
               </div>
-              <div className="w-full h-[1.5px] bg-gray-500 mb-4"></div>
+             
 
               <div className="w-full h-[1.5px] bg-gray-300 mb-4"></div>
 

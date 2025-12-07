@@ -212,6 +212,9 @@ export default function SwipableCartPanel() {
           <ButtonBase
             component={Link}
             to="/cart"
+            onClick={()=>{
+              setOpenCartPanel(false)
+            }}
             className="!w-full !py-3 !text-white !font-semibold !rounded-lg !shadow-md !hover:shadow-lg !transition-all"
             style={{ backgroundColor: "#ff5252" }}
           >
