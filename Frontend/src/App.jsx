@@ -11,6 +11,7 @@ import {
   ProductDetails,
   LoginSignup,
   Cart,
+  Checkout,
 } from "./Pages/index.js";
 import { ToastContainer } from "react-toastify";
 import Pra from "../Pra.jsx";
@@ -28,6 +29,7 @@ const App = () => {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/productlisting" element={<ProductListing />} />
         <Route path="/auth/login" element={<LoginSignup loginFlag={true} />} />

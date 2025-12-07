@@ -3,6 +3,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mailRouter from "./Routes/mail.route.js";
 import connectDB from "./DB/DBconnection.js";
+import ApiResponse from "./utils/api-response.js";
+import ApiError from "./utils/api-error.js";
 
 dotenv.config({
     path: "./.env.development",
@@ -25,7 +27,11 @@ app.use(cors({
 app.use("/api/v1/mail", mailRouter);
 
 app.get("/", (req, res) => {
-    res.send(`Hii buddy`);
+    try {
+        res.status(200).json(new ApiResponse(200, [], "API is running"));
+    } catch (error) {
+        res.status(500).json(new ApiError(500, null, "Internal Server Error"));
+    }
 });
 
 export default app;
