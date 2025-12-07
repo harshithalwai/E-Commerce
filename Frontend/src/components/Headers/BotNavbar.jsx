@@ -89,7 +89,8 @@ const BotNavbar = () => {
                   <li key={item} className="link flex-shrink-0 relative group">
                     <ButtonBase
                       component={Link}
-                      to={`/${item.toLowerCase()}`}
+                      // to={`/${item.toLowerCase()}`}
+                      to={`/productlisting`}
                       className="!font-semibold !px-2 !py-1 !rounded-md hover:bg-gray-200 hover:!text-[#ff5252] transition-all duration-200 text-sm flex items-center gap-1"
                     >
                       {item}

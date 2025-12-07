@@ -198,6 +198,7 @@ export default function SwipableCartPanel() {
 
         {/* FOOTER CHECKOUT */}
         <Box
+        className="flex gap-2"
           sx={{
             p: 2,
             borderTop: "1px solid #eee",
@@ -210,7 +211,13 @@ export default function SwipableCartPanel() {
             className="w-full py-3 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all"
             style={{ backgroundColor: "#ff5252" }}
           >
-            Proceed to Checkout • ₹{grandTotal}
+            View Cart
+          </button>
+          <button
+            className="w-full py-3 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all"
+            style={{ backgroundColor: "#ff5252" }}
+          >
+            Checkout • ₹{grandTotal}
           </button>
         </Box>
       </SwipeableDrawer>
