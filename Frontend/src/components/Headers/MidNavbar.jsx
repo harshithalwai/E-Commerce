@@ -296,14 +296,14 @@ const MobileActionsPopup = ({
         <div className="p-1 border-t border-gray-100">
           <div className="flex flex-col gap-1">
             <Link
-              to="/login"
+              to="/auth/login"
               className="w-full text-center px-4 py-2 text-sm font-medium text-gray-700 hover:bg-red-50 hover:text-red-600 border border-transparent hover:border-red-200 rounded-lg"
             >
               Login
             </Link>
 
             <Link
-              to="/register"
+              to="/auth/register"
               className="w-full text-center px-4 py-2 bg-red-500 text-white font-medium hover:bg-red-600 shadow-md hover:shadow-lg text-sm rounded-lg"
             >
               Sign Up

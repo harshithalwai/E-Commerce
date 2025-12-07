@@ -5,6 +5,8 @@ import Divider from "@mui/material/Divider";
 import { GiCrossMark } from "react-icons/gi";
 import Box from "@mui/material/Box";
 import StoreContext from "../context/storeContext/store.js";
+import { Link } from "react-router-dom";
+import ButtonBase from "@mui/material/ButtonBase";
 
 // SINGLE ITEM COMPONENT
 const CartItem = ({ img, name, size, price, oldPrice, qty, onChange }) => {
@@ -65,26 +67,26 @@ export default function SwipableCartPanel() {
 
   // ITEMS STATE
   const [items, setItems] = useState({
-    item1: { 
+    item1: {
       img: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=135/da/cms-assets/cms/product/ce0a0d4c-55a4-4ff1-b1d9-80ea7f05240b.jpg",
       name: "Amul Cow Milk",
       size: "500 ml",
       price: 29,
-      qty: 1
+      qty: 1,
     },
-    item: { 
+    item: {
       img: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=135/da/cms-assets/cms/product/ce0a0d4c-55a4-4ff1-b1d9-80ea7f05240b.jpg",
       name: "Amul Cow Milk",
       size: "500 ml",
       price: 29,
-      qty: 1
+      qty: 1,
     },
-    item17: { 
+    item17: {
       img: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=135/da/cms-assets/cms/product/ce0a0d4c-55a4-4ff1-b1d9-80ea7f05240b.jpg",
       name: "Amul Cow Milk",
       size: "500 ml",
       price: 29,
-      qty: 1
+      qty: 1,
     },
     item2: {
       img: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=135/da/cms-assets/cms/product/740e0dc4-565e-4e05-812d-d31f2ad27a4a.jpg",
@@ -92,7 +94,7 @@ export default function SwipableCartPanel() {
       size: "6 pieces",
       price: 57,
       oldPrice: 58,
-      qty: 1
+      qty: 1,
     },
     item3: {
       img: "https://cdn.grofers.com/cdn-cgi/image/f=auto,fit=scale-down,q=70,metadata=none,w=135/da/cms-assets/cms/product/c76e129b-7ff6-46a1-92bb-fa98b3b8c5db.jpg",
@@ -100,8 +102,8 @@ export default function SwipableCartPanel() {
       size: "12 pieces",
       price: 111,
       oldPrice: 116,
-      qty: 1
-    }
+      qty: 1,
+    },
   });
 
   // UPDATE QUANTITY
@@ -152,7 +154,7 @@ export default function SwipableCartPanel() {
           <h2 className="text-xl font-bold text-[#ff5252]">Shopping Cart</h2>
 
           <IconButton onClick={() => setOpenCartPanel(false)} size="small">
-            <GiCrossMark size={20} className="text-[#ff5252]"/>
+            <GiCrossMark size={20} className="text-[#ff5252]" />
           </IconButton>
         </Box>
 
@@ -198,7 +200,7 @@ export default function SwipableCartPanel() {
 
         {/* FOOTER CHECKOUT */}
         <Box
-        className="flex gap-2"
+          className="flex gap-2"
           sx={{
             p: 2,
             borderTop: "1px solid #eee",
@@ -207,12 +209,14 @@ export default function SwipableCartPanel() {
             backgroundColor: "#fff",
           }}
         >
-          <button
-            className="w-full py-3 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all"
+          <ButtonBase
+            component={Link}
+            to="/cart"
+            className="!w-full !py-3 !text-white !font-semibold !rounded-lg !shadow-md !hover:shadow-lg !transition-all"
             style={{ backgroundColor: "#ff5252" }}
           >
             View Cart
-          </button>
+          </ButtonBase>
           <button
             className="w-full py-3 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all"
             style={{ backgroundColor: "#ff5252" }}

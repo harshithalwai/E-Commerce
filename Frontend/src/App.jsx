@@ -1,10 +1,16 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import { Footer, Model, Navbar, SwipableCartPanel } from "./components/index.js";
+import {
+  Footer,
+  Model,
+  Navbar,
+  SwipableCartPanel,
+} from "./components/index.js";
 import {
   Home,
   ProductListing,
   ProductDetails,
   LoginSignup,
+  Cart,
 } from "./Pages/index.js";
 import { ToastContainer } from "react-toastify";
 import Pra from "../Pra.jsx";
@@ -22,6 +28,7 @@ const App = () => {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/productlisting" element={<ProductListing />} />
         <Route path="/auth/login" element={<LoginSignup loginFlag={true} />} />
         <Route
@@ -35,7 +42,7 @@ const App = () => {
       {!hideLayout && <Footer />}
 
       <Model />
-      <SwipableCartPanel/>
+      <SwipableCartPanel />
       <ToastContainer />
     </>
   );
