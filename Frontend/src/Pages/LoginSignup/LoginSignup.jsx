@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { motion, AnimatePresence } from "framer-motion";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -15,42 +16,37 @@ export default function AnimatedAuthForm({ loginFlag }) {
   const [isLogin, setIsLogin] = useState(loginFlag);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // ⬇⬇ React Hook Form setup
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm();
 
-    if (!isLogin && formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
-      return;
-    }
+  // Password match check
+  const passwordValue = watch("password");
 
-    console.log(isLogin ? "Login" : "Signup", formData);
+  const onSubmit = (data) => {
+    console.log("Submitted:", data);
     alert(`${isLogin ? "Login" : "Signup"} successful!`);
-  };
-
-  const handleChange = (field) => (e) => {
-    setFormData({ ...formData, [field]: e.target.value });
+    reset();
   };
 
   const switchMode = () => {
     setIsLogin(!isLogin);
-    setFormData({ name: "", email: "", password: "", confirmPassword: "" });
+    reset();
     setShowPassword(false);
     setShowConfirmPassword(false);
   };
 
   const handleOAuthLogin = (provider) => {
-    console.log(`${provider} OAuth login initiated`);
-    alert(`${provider} login - API integration pending`);
-    // Add your OAuth API calls here
+    alert(`${provider} login API Pending`);
   };
 
+  // Animation Variants
   const containerVariants = {
     hidden: { opacity: 0, scale: 0.8, y: 50 },
     visible: {
@@ -87,7 +83,7 @@ export default function AnimatedAuthForm({ loginFlag }) {
 
   return (
     <div className="h-screen flex items-center justify-center bg-gradient-to-br from-red-500 via-pink-500 to-rose-400 overflow-hidden relative p-4">
-      {/* Background Shapes */}
+      {/* Floating Shapes */}
       {floatingShapes.map((shape, i) => (
         <motion.div
           key={i}
@@ -114,14 +110,14 @@ export default function AnimatedAuthForm({ loginFlag }) {
         />
       ))}
 
-      {/* Centered Form */}
+      {/* FORM BOX */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
         className="relative z-10 w-full max-w-sm"
       >
-        <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl p-8 border border-white/20  overflow-y-auto mx-auto">
+        <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl p-8 border border-white/20">
           {/* Toggle */}
           <div className="flex justify-center mb-6 relative">
             <div className="bg-white/20 rounded-full p-1 flex gap-2 relative">
@@ -137,10 +133,8 @@ export default function AnimatedAuthForm({ loginFlag }) {
               />
               <button
                 type="button"
-                onClick={() => {
-                  if (!isLogin) switchMode();
-                }}
-                className={`relative z-10 px-6 py-1.5 rounded-full text-sm transition-colors font-medium ${
+                onClick={() => !isLogin && switchMode()}
+                className={`relative z-10 px-6 py-1.5 rounded-full text-sm font-medium ${
                   isLogin ? "text-red-500" : "text-white"
                 }`}
               >
@@ -148,10 +142,8 @@ export default function AnimatedAuthForm({ loginFlag }) {
               </button>
               <button
                 type="button"
-                onClick={() => {
-                  if (isLogin) switchMode();
-                }}
-                className={`relative z-10 px-6 py-1.5 rounded-full text-sm transition-colors font-medium ${
+                onClick={() => isLogin && switchMode()}
+                className={`relative z-10 px-6 py-1.5 rounded-full text-sm font-medium ${
                   !isLogin ? "text-red-500" : "text-white"
                 }`}
               >
@@ -160,7 +152,7 @@ export default function AnimatedAuthForm({ loginFlag }) {
             </div>
           </div>
 
-          {/* Icon */}
+          {/* Title Icon */}
           <motion.div
             key={isLogin ? "login-icon" : "signup-icon"}
             initial={{ scale: 0, rotate: -180 }}
@@ -188,7 +180,7 @@ export default function AnimatedAuthForm({ loginFlag }) {
             {isLogin ? "Welcome Back" : "Create Account"}
           </motion.h2>
 
-          {/* Form */}
+          {/* FORM */}
           <AnimatePresence mode="wait" custom={isLogin ? 1 : -1}>
             <motion.form
               key={isLogin ? "login" : "signup"}
@@ -197,92 +189,118 @@ export default function AnimatedAuthForm({ loginFlag }) {
               initial="enter"
               animate="center"
               exit="exit"
-              onSubmit={handleSubmit}
+              onSubmit={handleSubmit(onSubmit)}
               className="space-y-3"
             >
+              {/* FULL NAME */}
               {!isLogin && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="relative"
-                >
+                <div className="relative">
                   <PersonIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-white/70 w-4 h-4" />
                   <input
                     type="text"
                     placeholder="Full Name"
-                    value={formData.name}
-                    onChange={handleChange("name")}
-                    required={!isLogin}
-                    className="w-full bg-white/20 border border-white/30 rounded-lg px-10 py-2.5 text-white text-sm placeholder-white/60 outline-none"
+                    {...register("name", {
+                      required: "Name is required",
+                      minLength: {
+                        value: 3,
+                        message: "Minimum 3 characters",
+                      },
+                    })}
+                    className="w-full bg-white/20 border border-white/30 rounded-lg px-10 py-2.5 text-white text-sm outline-none"
                   />
-                </motion.div>
+                  {errors.name && (
+                    <p className="text-red-200 text-xs mt-1">{errors.name.message}</p>
+                  )}
+                </div>
               )}
 
+              {/* EMAIL */}
               <div className="relative">
                 <EmailIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-white/70 w-4 h-4" />
                 <input
                   type="email"
                   placeholder="Email Address"
-                  value={formData.email}
-                  onChange={handleChange("email")}
-                  required
-                  className="w-full bg-white/20 border border-white/30 rounded-lg px-10 py-2.5 text-white text-sm placeholder-white/60 outline-none"
+                  {...register("email", {
+                    required: "Email is required",
+                    pattern: {
+                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                      message: "Invalid email format",
+                    },
+                  })}
+                  className="w-full bg-white/20 border border-white/30 rounded-lg px-10 py-2.5 text-white text-sm outline-none"
                 />
+                {errors.email && (
+                  <p className="text-red-200 text-xs mt-1">{errors.email.message}</p>
+                )}
               </div>
 
+              {/* PASSWORD */}
               <div className="relative">
                 <LockIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-white/70 w-4 h-4" />
+
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Password"
-                  value={formData.password}
-                  onChange={handleChange("password")}
-                  required
-                  className="w-full bg-white/20 border border-white/30 rounded-lg px-10 py-2.5 text-white text-sm placeholder-white/60 outline-none"
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: { value: 6, message: "Minimum 6 characters" },
+                  })}
+                  className="w-full bg-white/20 border border-white/30 rounded-lg px-10 py-2.5 text-white text-sm outline-none"
                 />
+
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-white/70 text-sm"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-white/70"
                 >
                   {showPassword ? <VisibilityOff /> : <Visibility />}
                 </button>
+
+                {errors.password && (
+                  <p className="text-red-200 text-xs mt-1">{errors.password.message}</p>
+                )}
               </div>
 
+              {/* CONFIRM PASSWORD */}
               {!isLogin && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="relative"
-                >
+                <div className="relative">
                   <LockIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-white/70 w-4 h-4" />
+
                   <input
                     type={showConfirmPassword ? "text" : "password"}
                     placeholder="Confirm Password"
-                    value={formData.confirmPassword}
-                    onChange={handleChange("confirmPassword")}
-                    required={!isLogin}
-                    className="w-full bg-white/20 border border-white/30 rounded-lg px-10 py-2.5 text-white text-sm placeholder-white/60 outline-none"
+                    {...register("confirmPassword", {
+                      required: "Confirm your password",
+                      validate: (v) =>
+                        v === passwordValue || "Passwords do not match",
+                    })}
+                    className="w-full bg-white/20 border border-white/30 rounded-lg px-10 py-2.5 text-white text-sm outline-none"
                   />
+
                   <button
                     type="button"
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-white/70 text-sm"
+                    onClick={() =>
+                      setShowConfirmPassword(!showConfirmPassword)
+                    }
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-white/70"
                   >
                     {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
                   </button>
-                </motion.div>
+
+                  {errors.confirmPassword && (
+                    <p className="text-red-200 text-xs mt-1">
+                      {errors.confirmPassword.message}
+                    </p>
+                  )}
+                </div>
               )}
 
+              {/* SUBMIT */}
               <motion.button
                 type="submit"
                 whileHover={{ scale: 1.02, y: -1 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full text-white py-2.5 rounded-lg font-bold text-sm shadow-md hover:shadow-lg transition-all mt-3 cursor-pointer"
+                className="w-full text-white py-2.5 rounded-lg font-bold text-sm shadow-md mt-3 cursor-pointer"
                 style={{ backgroundColor: "#ff5252" }}
               >
                 {isLogin ? "Sign In" : "Create Account"}
@@ -291,86 +309,49 @@ export default function AnimatedAuthForm({ loginFlag }) {
           </AnimatePresence>
 
           {/* Divider */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="mt-5 mb-4 flex items-center"
-          >
+          <div className="mt-5 mb-4 flex items-center">
             <div className="flex-1 border-t border-white/30"></div>
             <span className="px-3 text-white/70 text-xs">or continue with</span>
             <div className="flex-1 border-t border-white/30"></div>
-          </motion.div>
+          </div>
 
-          {/* OAuth Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="flex justify-between items-center gap-2"
-          >
-            <motion.button
-              type="button"
-              onClick={() => handleOAuthLogin("Google")}
-              whileHover={{ scale: 1.02, y: -1 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg px-4 py-2.5 text-white text-sm font-medium hover:bg-white/30 transition-all flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <GoogleIcon className="w-4 h-4" />
-            </motion.button>
-
-            <motion.button
-              type="button"
-              onClick={() => handleOAuthLogin("GitHub")}
-              whileHover={{ scale: 1.02, y: -1 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg px-4 py-2.5 text-white text-sm font-medium hover:bg-white/30 transition-all flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <GitHubIcon className="w-4 h-4" />
-            </motion.button>
-
-            <motion.button
-              type="button"
-              onClick={() => handleOAuthLogin("Microsoft")}
-              whileHover={{ scale: 1.02, y: -1 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg px-4 py-2.5 text-white text-sm font-medium hover:bg-white/30 transition-all flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <MicrosoftIcon className="w-4 h-4" />
-            </motion.button>
-          </motion.div>
+          {/* OAuth */}
+          <div className="flex justify-between gap-2">
+            {[GoogleIcon, GitHubIcon, MicrosoftIcon].map((Icon, i) => (
+              <button
+                key={i}
+                onClick={() =>
+                  handleOAuthLogin(
+                    i === 0 ? "Google" : i === 1 ? "GitHub" : "Microsoft"
+                  )
+                }
+                className="w-full bg-white/20 border border-white/30 rounded-lg py-2.5 flex justify-center"
+              >
+                <Icon className="text-white w-4 h-4" />
+              </button>
+            ))}
+          </div>
 
           {/* Forgot Password */}
           {isLogin && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ delay: 0.4 }}
-              className="mt-4 text-center"
-            >
-              <a href="#" className="text-white/80 hover:text-white text-xs">
+            <div className="mt-4 text-center">
+              <a href="#" className="text-white/80 text-xs">
                 Forgot password?
               </a>
-            </motion.div>
+            </div>
           )}
 
-          {/* Switch Bottom */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="mt-4 text-center text-white/80 text-xs"
-          >
+          {/* Switch Mode */}
+          <div className="mt-4 text-center text-white/80 text-xs">
             {isLogin ? "Don't have an account? " : "Already have an account? "}
             <button
               type="button"
               onClick={switchMode}
-              className="!text-white font-semibold link text-xs"
+              className="!text-white font-semibold text-xs"
             >
               {isLogin ? "Sign Up" : "Login"}
             </button>
-          </motion.div>
+          </div>
         </div>
       </motion.div>
     </div>
