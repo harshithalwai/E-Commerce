@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { RiMenu2Fill } from "react-icons/ri";
 import Button from "@mui/material/Button";
 import { IoIosArrowDown } from "react-icons/io";
@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import ButtonBase from "@mui/material/ButtonBase";
 import DrawerBox from "./DrawerBox";
+import "./style.css";
 
 const BotNavbar = () => {
   const [isOpenCatPanel, setIsOpenCatPanel] = useState(false);
@@ -25,28 +26,38 @@ const BotNavbar = () => {
   const categoriesData = [
     {
       title: "Electronics",
-      subcategories: ["Laptop", "Mobile", "Tablet", "Watch"]
+      subcategories: ["Laptop", "Mobile", "Tablet", "Watch"],
     },
     {
       title: "Fashion",
-      subcategories: ["Purse", "Shoes", "T-Shirt", "Tote Bag"]
+      subcategories: ["Purse", "Shoes", "T-Shirt", "Tote Bag"],
     },
     {
       title: "Furniture",
-      subcategories: ["Bottle Grinder", "Pillow", "Poufs", "Sofas"]
+      subcategories: ["Bottle Grinder", "Pillow", "Poufs", "Sofas"],
     },
     {
       title: "Jewellery",
-      subcategories: ["Diamond Cluster", "Drop Earrings", "Earrings", "Necklace"]
+      subcategories: [
+        "Diamond Cluster",
+        "Drop Earrings",
+        "Earrings",
+        "Necklace",
+      ],
     },
     {
       title: "Retro Fashion",
-      subcategories: ["Bucket Hat", "Denim Skirt", "Shimmer", "Tie-Dye"]
+      subcategories: ["Bucket Hat", "Denim Skirt", "Shimmer", "Tie-Dye"],
     },
     {
       title: "Watches",
-      subcategories: ["Aviator Watches", "Goggles", "Hybrid Watches", "Smart Watches"]
-    }
+      subcategories: [
+        "Aviator Watches",
+        "Goggles",
+        "Hybrid Watches",
+        "Smart Watches",
+      ],
+    },
   ];
 
   const openCategoryPanel = () => setIsOpenCatPanel((prev) => !prev);
@@ -63,7 +74,7 @@ const BotNavbar = () => {
   return (
     <>
       <div className="bg-white">
-        <div className="container py-3 flex items-center gap-2 sm:gap-5 text-sm font-semibold">
+        <div className="container py-3 flex items-center justify-between text-sm font-semibold w-full gap-2">
           {/* Category Button */}
           <div className="flex-shrink-0">
             <ButtonBase
@@ -82,7 +93,7 @@ const BotNavbar = () => {
           <div className="w-[2px] bg-gray-300 h-6 hidden lg:block flex-shrink-0"></div>
 
           {/* Navigation Links */}
-          <div className="flex-1 min-w-0">
+          <div className="flex-1 w-[40%] overflow-x-auto ">
             <div className="hidden sm:block scrollbar-hide relative">
               <ul className="flex gap-2 text-gray-700 font-semibold whitespace-nowrap pb-1">
                 {navList.map((item) => (
@@ -106,17 +117,21 @@ const BotNavbar = () => {
                                 {category.title}
                               </h3>
                               <ul className="space-y-2">
-                                {category.subcategories.map((subcat, subIndex) => (
-                                  <li key={subIndex}>
-                                    <Button
-                                      component={Link}
-                                      to={`/${category.title.toLowerCase()}/${subcat.toLowerCase().replace(/\s+/g, '-')}`}
-                                      className="!w-full !justify-start !capitalize hover:!text-[#ff5252] hover:!bg-gray-50 !rounded-md !text-left !font-normal !text-gray-600 !px-2 !py-1.5 !text-sm"
-                                    >
-                                      {subcat}
-                                    </Button>
-                                  </li>
-                                ))}
+                                {category.subcategories.map(
+                                  (subcat, subIndex) => (
+                                    <li key={subIndex}>
+                                      <Button
+                                        component={Link}
+                                        to={`/${category.title.toLowerCase()}/${subcat
+                                          .toLowerCase()
+                                          .replace(/\s+/g, "-")}`}
+                                        className="!w-full !justify-start !capitalize hover:!text-[#ff5252] hover:!bg-gray-50 !rounded-md !text-left !font-normal !text-gray-600 !px-2 !py-1.5 !text-sm"
+                                      >
+                                        {subcat}
+                                      </Button>
+                                    </li>
+                                  )
+                                )}
                               </ul>
                             </div>
                           ))}
@@ -224,18 +239,6 @@ const BotNavbar = () => {
           </div>
         </div>
       </div>
-
-      {/* Scrollbar Hide */}
-      <style jsx>{`
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
-
       {/* Drawer */}
       <DrawerBox
         isOpenCatPanel={isOpenCatPanel}

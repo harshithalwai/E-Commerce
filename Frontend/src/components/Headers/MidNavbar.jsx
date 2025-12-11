@@ -67,7 +67,6 @@ const Badge = ({ children, count, className = "" }) => {
 
   return (
     <div className={`relative inline-block ${className}`}>
-      {console.log(children)}
       {children}
       {count > 0 && (
         <span
@@ -339,11 +338,9 @@ const MobileActionsPopup = ({
 // MID NAVBAR
 const MidNavbar = () => {
   const { openCartPanel, setOpenCartPanel } = useContext(StoreContext);
-
   const [wishlistCount, setWishlistCount] = useState(2);
   const [notificationCount, setNotificationCount] = useState(5);
   const [cartCount, setCartCount] = useState(4);
-
   const [showNotifications, setShowNotifications] = useState(false);
   const [showMobileActions, setShowMobileActions] = useState(false);
 
@@ -398,7 +395,7 @@ const MidNavbar = () => {
           </div>
 
           {/* SEARCH */}
-          <div className="w-full flex-1 mx-1 xl:mx-0">
+          <div className="hidden md:block w-full flex-1 mx-1 xl:mx-0">
             <SearchBar />
           </div>
 
