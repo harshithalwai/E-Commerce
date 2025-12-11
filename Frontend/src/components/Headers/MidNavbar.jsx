@@ -67,6 +67,7 @@ const Badge = ({ children, count, className = "" }) => {
 
   return (
     <div className={`relative inline-block ${className}`}>
+      {console.log(children)}
       {children}
       {count > 0 && (
         <span
@@ -123,7 +124,12 @@ const IconButton = ({
 
 // Icons
 const HeartIcon = ({ className = "w-6 h-6" }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <svg
+    className={className}
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -134,7 +140,12 @@ const HeartIcon = ({ className = "w-6 h-6" }) => (
 );
 
 const BellIcon = ({ className = "w-6 h-6" }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <svg
+    className={className}
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -145,7 +156,12 @@ const BellIcon = ({ className = "w-6 h-6" }) => (
 );
 
 const ShoppingCartIcon = ({ className = "w-6 h-6" }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <svg
+    className={className}
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -156,7 +172,12 @@ const ShoppingCartIcon = ({ className = "w-6 h-6" }) => (
 );
 
 const MoreIcon = ({ className = "w-5 h-5" }) => (
-  <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <svg
+    className={className}
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -331,10 +352,16 @@ const MidNavbar = () => {
 
   useEffect(() => {
     const handleOutside = (e) => {
-      if (notificationRef.current && !notificationRef.current.contains(e.target))
+      if (
+        notificationRef.current &&
+        !notificationRef.current.contains(e.target)
+      )
         setShowNotifications(false);
 
-      if (mobileActionsRef.current && !mobileActionsRef.current.contains(e.target))
+      if (
+        mobileActionsRef.current &&
+        !mobileActionsRef.current.contains(e.target)
+      )
         setShowMobileActions(false);
     };
 
@@ -450,9 +477,7 @@ const MidNavbar = () => {
                   <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center border border-white">
                     {wishlistCount + notificationCount + cartCount > 99
                       ? "99+"
-                      : wishlistCount +
-                        notificationCount +
-                        cartCount}
+                      : wishlistCount + notificationCount + cartCount}
                   </span>
                 )}
               </IconButton>

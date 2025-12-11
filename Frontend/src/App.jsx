@@ -18,7 +18,6 @@ import Pra from "../Pra.jsx";
 const App = () => {
   const location = useLocation();
 
-  // Hide navbar & footer when on /auth
   const hideLayout =
     location.pathname === "/auth/register" ||
     location.pathname === "/auth/login";

@@ -96,7 +96,7 @@ const TopNavbar = () => {
             <ul className="z-50 flex items-center space-x-2 sm:space-x-4 text-xs sm:text-sm">
               <li className="!hidden sm:!block link text-[13px] ">
                 <Link to="/help-center" className="">
-                  Help Center
+                  Help <span className="!hidden !sm:inline-block">Center</span>
                 </Link>
               </li>
 
@@ -104,7 +104,8 @@ const TopNavbar = () => {
 
               <li className="!hidden sm:!block link text-[13px]">
                 <Link to="/order-tracking" className="">
-                  Order Tracking
+                  Order{" "}
+                  <span className="!hidden !sm:inline-block">Tracking</span>
                 </Link>
               </li>
 
@@ -128,7 +129,7 @@ const TopNavbar = () => {
                         alt={selectedCountry.name.common}
                         className="w-4 h-3 object-cover rounded-sm"
                       />
-                      <span className="hidden sm:inline">
+                      <span className="hidden sm:inline truncate">
                         {selectedCountry.name.common}
                       </span>
                     </>
