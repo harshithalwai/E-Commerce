@@ -82,7 +82,7 @@ export default function AnimatedAuthForm({ loginFlag }) {
   ];
 
   return (
-    <div className="h-screen flex items-center justify-center bg-gradient-to-br from-red-500 via-pink-500 to-rose-400 overflow-hidden relative p-4">
+    <div className="h-screen flex items-center justify-center bg-gradient-to-br from-red-500 via-pink-500 to-rose-400 overflow-hidden relative ">
       {/* Floating Shapes */}
       {floatingShapes.map((shape, i) => (
         <motion.div
