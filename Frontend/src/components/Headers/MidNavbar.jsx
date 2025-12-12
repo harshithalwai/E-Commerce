@@ -395,7 +395,7 @@ const MidNavbar = () => {
           </div>
 
           {/* SEARCH */}
-          <div className="hidden md:block w-full flex-1 mx-1 xl:mx-0">
+          <div className="w-full flex-1 mx-1 xl:mx-0">
             <SearchBar />
           </div>
 

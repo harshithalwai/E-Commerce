@@ -41,13 +41,13 @@ const MainMenu = () => {
             <h1 className="text-3xl font-semibold text-gray-800">
               Popular Products
             </h1>
-            <h3 className="text-sm text-gray-600">
+            <h3 className="mt-2 text-sm text-gray-600">
               Don’t miss the latest offers valid till the end of this month.
             </h3>
           </div>
 
           {/* Tabs Section */}
-          <div className="w-[60%]">
+          <div className="w-full md:w-[60%]">
             <Box
               sx={{
                 maxWidth: "100%",

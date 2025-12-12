@@ -22,9 +22,8 @@ export default defineConfig({
         target: 'http://localhost:3000',
         changeOrigin: true,
       }
-    }, 
-    host: true,           // ← allows mobile access (0.0.0.0)
-    port: 5173,           // ← you can change but keep default
-    strictPort: false,
+    },
+    host: true,
+    port: 5173,
   }
 })

@@ -36,7 +36,7 @@ const App = () => {
           path="/auth/register"
           element={<LoginSignup loginFlag={false} />}
         />
-        <Route path="/pras" element={<Pra />} />
+        <Route path="/pra" element={<Pra />} />
         <Route path="/product/:id" element={<ProductDetails />} />
       </Routes>
 
