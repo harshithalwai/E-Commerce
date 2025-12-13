@@ -5,7 +5,14 @@ import Box from "@mui/material/Box";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import "./MainMenu.css";
-import { BannerSlider,  DealOfTheDay,  DisplayBar, InstaSlider, Products, SocialSwiper } from "../index.js";
+import {
+  BannerSlider,
+  DealOfTheDay,
+  DisplayBar,
+  InstaSlider,
+  Products,
+  SocialSwiper,
+} from "../index.js";
 
 const categories = [
   "All",
@@ -84,45 +91,50 @@ const MainMenu = () => {
             </Box>
           </div>
         </div>
+
         <div className="">
-          <div className="container border border-red-400 rounded-lg py-6 px-8 flex flex-col sm:flex-row items-center justify-between gap-4 hover:shadow-lg hover:scale-[1.02] transition-all duration-300 bg-white">
+          <div className="container border border-red-400 rounded-lg py-4 px-4 sm:py-6 sm:px-8 flex items-center justify-between gap-4 bg-white hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
             {/* Left Section */}
-            <div className="flex items-center gap-3">
-              {/* Truck SVG */}
+            <div className="flex items-center gap-2 sm:gap-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="black"
                 viewBox="0 0 24 24"
-                width="42"
-                height="42"
+                width="32"
+                height="32"
                 className="transition-transform duration-500 group-hover:translate-x-2"
               >
                 <path d="M3 3h13v10h-2v2h-2v-2H3V3zm13 2H5v6h11V5zm2 2h3l3 4v7h-2v2h-2v-2H5v2H3v-2H1v-7h17V7zm3 4-2-3h-1v3h3zm-2 5a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-14 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
               </svg>
-              <span className="text-2xl font-bold text-gray-900 tracking-wide">
+
+              <span className="hidden lg:inline-block text-lg xl:text-xl font-bold text-gray-900 tracking-wide">
                 FREE SHIPPING
               </span>
             </div>
 
-            {/* Divider (for larger screens only) */}
-            <div className="hidden sm:block w-px h-10 bg-gray-300"></div>
+            {/* Divider */}
+            <div className="hidden sm:block w-px h-8 bg-gray-300"></div>
 
             {/* Center Text */}
-            <div className="text-center text-lg text-gray-800 font-medium">
-              Free Delivery Now On Your First Order and over{" "}
-              <span className="font-semibold text-red-600">$200</span>
+            <div className="text-center text-sm sm:text-base md:text-lg text-gray-800 font-medium">
+              Free Delivery{" "}
+              <span className="hidden lg:inline-block">
+                now on your first order and over
+              </span>
             </div>
 
-            {/* Divider (for larger screens only) */}
-            <div className="hidden sm:block w-px h-10 bg-gray-300"></div>
+            {/* Divider */}
+            <div className="hidden sm:block w-px h-8 bg-gray-300"></div>
 
             {/* Right Section */}
-            <div className="text-2xl font-extrabold text-gray-900">
+            <div className="text-lg sm:text-xl md:text-2xl font-extrabold text-gray-900">
               - ONLY <span className="text-red-600">$200*</span>
             </div>
           </div>
         </div>
+
         <BannerSlider slidesPerViewCount={3} />
+        
         <Products category={categories[value]} />
 
         <DisplayBar />
@@ -132,9 +144,9 @@ const MainMenu = () => {
         </div>
 
         <BannerSlider slidesPerViewCount={2} />
-         <DealOfTheDay />
-         <SocialSwiper/>
-         <InstaSlider/>
+        <DealOfTheDay />
+        <SocialSwiper />
+        <InstaSlider />
       </div>
     </div>
   );
