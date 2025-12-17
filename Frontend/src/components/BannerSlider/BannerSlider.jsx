@@ -59,7 +59,6 @@ export default function BannerSlider({ slidesPerViewCount = 3 }) {
                   alt={product.name}
                   className="w-full h-auto transition-transform duration-500 group-hover:scale-110 object-cover"
                 />
-
                 <div className="!absolute right-2 top-0 h-full w-[50%] flex items-center justify-end">
                   <div className="p-4 rounded-lg text-right text-black">
                     <h3 className="font-bold leading-tight mb-1">
