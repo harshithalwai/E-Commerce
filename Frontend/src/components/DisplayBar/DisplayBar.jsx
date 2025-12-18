@@ -2,7 +2,7 @@ import React from "react";
 
 export default function DisplayBar() {
   return (
-    <div className="container">
+    <div className="hidden md:block container">
       <div
         className="relative rounded-lg overflow-hidden h-[100px]
                    bg-cover bg-center group transition-transform  flex justify-center items-center duration-700 ease-in-out"

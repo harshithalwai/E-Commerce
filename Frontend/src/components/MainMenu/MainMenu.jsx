@@ -40,7 +40,7 @@ const MainMenu = () => {
   };
 
   return (
-    <div className="pt-10  bg-white ">
+    <div className="pt-10 pb-5 bg-white ">
       <div className="container mx-auto px-4">
         {/* Header Section */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
@@ -92,7 +92,7 @@ const MainMenu = () => {
           </div>
         </div>
 
-        <div className="">
+        <div className="mb-4">
           <div className="container border border-red-400 rounded-lg py-4 px-4 sm:py-6 sm:px-8 flex items-center justify-between gap-4 bg-white hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
             {/* Left Section */}
             <div className="flex items-center gap-2 sm:gap-3">

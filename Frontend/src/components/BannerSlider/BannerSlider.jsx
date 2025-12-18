@@ -28,11 +28,12 @@ export default function BannerSlider({ slidesPerViewCount = 3 }) {
   ];
 
   return (
-    <div className="bg-white py-5">
-      <div className="container mx-auto px-4 relative">
-        {/* Navigation buttons */}
-        <div className="swiper-button-prev !left-0 !text-black !bg-white !rounded-full !shadow-md hover:!bg-black hover:!text-white transition-all duration-300"></div>
-        <div className="swiper-button-next !right-0 !text-black !bg-white !rounded-full !shadow-md hover:!bg-black hover:!text-white transition-all duration-300"></div>
+<div className="bg-white overflow-x-hidden">
+      <div className="container mx-auto px-2 sm:px-4 relative overflow-x-hidden">
+        {/* Navigation */}
+        <div className="swiper-button-prev !hidden md:!flex !-left-2 lg:!-left-4 !text-black !bg-white !rounded-full !shadow-md hover:!bg-black hover:!text-white !w-10 !h-10 lg:!w-12 lg:!h-12"></div>
+        <div className="swiper-button-next !hidden md:!flex !-right-2 lg:!-right-4 !text-black !bg-white !rounded-full !shadow-md hover:!bg-black hover:!text-white !w-10 !h-10 lg:!w-12 lg:!h-12"></div>
+
 
         <Swiper
           slidesPerView={slidesPerViewCount}

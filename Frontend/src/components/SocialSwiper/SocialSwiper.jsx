@@ -37,7 +37,7 @@ export default function SocialSwiper() {
   const nextRef = useRef(null);
 
   return (
-    <div className="w-full max-w-6xl mx-auto p-6">
+    <div className="w-full container">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-2xl font-semibold">Featured</h2>
 
