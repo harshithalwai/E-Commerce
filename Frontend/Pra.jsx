@@ -29,54 +29,127 @@ const Pra = () => {
   };
   return (
     <>
-      <SwiperSlide className="relative w-full h-full">
-              <img
-                src="./Hero-slider-1.jpg"
-                alt="Green T-Shirt"
-                className="w-full h-full object-cover"
-              />
+      <motion.div
+        key={item.id}
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: 20, height: 0 }}
+        transition={{ delay: index * 0.1 }}
+        className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow p-6"
+      >
+        <div className="flex gap-6">
+          {/* IMAGE */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="w-32 h-32 bg-gray-200 rounded-xl overflow-hidden flex-shrink-0"
+          >
+            <img
+              src={item.image}
+              alt={item.name}
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
 
-              <div className="absolute inset-0 bg-black/30 flex items-center text-white px-4 sm:px-6 md:px-12">
-                <motion.div
-                  key={activeIndex === 1 ? "slide2-active" : "slide2-inactive"}
-                  variants={list}
-                  initial="hidden"
-                  animate={activeIndex === 1 ? "visible" : "hidden"}
-                  className="absolute right-4 sm:right-6 md:right-10 max-w-[85%] sm:max-w-[60%]"
-                >
-                  <motion.p
-                    variants={item}
-                    className="hidden sm:inline-block mb-2 font-medium"
-                  >
-                    Big Saving Days Sale
-                  </motion.p>
+          {/* DETAILS */}
+          <div className="flex-1">
+            <div className="flex justify-between items-start mb-2">
+              <div>
+                <h3 className="text-xl font-semibold text-gray-800 mb-1">
+                  {item.name}
+                </h3>
 
-                  <motion.h2
-                    variants={item}
-                    className="text-base sm:text-3xl md:text-4xl font-bold leading-snug"
-                  >
-                    Women Solid Round <br /> Green T-Shirt
-                  </motion.h2>
+                <div className="flex gap-2 mb-1">
+                  <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
+                    Size: {item.size}
+                  </span>
+                  <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
+                    {item.color}
+                  </span>
+                </div>
 
-                  <motion.p
-                    variants={item}
-                    className="text-lg sm:text-xl md:text-2xl mt-3"
-                  >
-                    <span className="hidden md:inline-block">
-                      Starting At Only
-                    </span>{" "}
-                    <span className="text-[#ff4d4d] font-semibold">$59.00</span>
-                  </motion.p>
-
-                  <motion.button
-                    variants={item}
-                    className="cursor-pointer mt-5 sm:mt-6 px-4 sm:px-6 py-2 sm:py-3 bg-[#ff4d4d] hover:bg-[#ff2e2e] transition-all rounded-lg font-semibold text-sm sm:text-base"
-                  >
-                    SHOP NOW
-                  </motion.button>
-                </motion.div>
+                {item.seller && (
+                  <p className="text-sm text-gray-500">
+                    Seller: <span className="font-medium">{item.seller}</span>
+                  </p>
+                )}
               </div>
-            </SwiperSlide>
+
+              {/* REMOVE BUTTON */}
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={() => removeItem(item.id)}
+                className="text-gray-400 hover:text-[#ff5252] transition-colors p-2"
+              >
+                <FiTrash2 className="text-xl" />
+              </motion.button>
+            </div>
+
+            {/* QUANTITY + PRICING */}
+            <div className="flex justify-between items-center mt-4">
+              <div className="flex items-center gap-3 bg-gray-100 rounded-lg p-1">
+                <motion.button
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => updateQuantity(item.id, -1)}
+                  className="w-8 h-8 flex items-center justify-center rounded-md hover:bg-white transition-colors"
+                >
+                  <FiMinus className="text-[#ff5252]" />
+                </motion.button>
+
+                <span className="font-semibold text-gray-800 w-8 text-center">
+                  {item.quantity}
+                </span>
+
+                <motion.button
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => updateQuantity(item.id, 1)}
+                  className="w-8 h-8 flex items-center justify-center rounded-md hover:bg-white transition-colors"
+                >
+                  <FiPlus className="text-[#ff5252]" />
+                </motion.button>
+              </div>
+
+              {/* PRICE AREA */}
+              <div className="text-right">
+                <p className="text-2xl font-bold text-[#ff5252]">
+                  ₹{(item.price * item.quantity).toFixed(2)}
+                </p>
+
+                {item.oldPrice && (
+                  <p className="text-sm line-through text-gray-400">
+                    ₹{item.oldPrice}
+                  </p>
+                )}
+
+                {item.discountPercent && (
+                  <p className="text-sm text-green-600 font-medium">
+                    {item.discountPercent}% Off
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {/* SAVE FOR LATER & REMOVE BUTTONS */}
+            <div className="flex gap-6 mt-4 text-sm font-medium">
+              {/* SAVE FOR LATER */}
+              <button
+                onClick={() => saveForLater(item)}
+                className="text-[#ff5252] hover:underline"
+              >
+                Save for Later
+              </button>
+
+              {/* REMOVE */}
+              <button
+                onClick={() => removeItem(item.id)}
+                className="text-gray-500 hover:text-[#ff5252] hover:underline"
+              >
+                Remove
+              </button>
+            </div>
+          </div>
+        </div>
+      </motion.div>
     </>
   );
 };
